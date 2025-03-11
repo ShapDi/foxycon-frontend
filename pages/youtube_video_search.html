@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фильтр видео YouTube</title>
+    <script src="js/auth.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        form {
+            background: white;
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-top: 2px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #cc0000;
+        }
+        .results-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: 320px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+        }
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #333;
+        }
+        .card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .card a:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h2>Фильтр поиска видео YouTube</h2>
+    <form id="filterForm">
+        <label>Название видео: <input type="text" name="title"></label>
+        <label>Мин. просмотров: <input type="number" name="number_views_min"></label>
+        <label>Макс. просмотров: <input type="number" name="number_views_max"></label>
+        <label>Мин. лайков: <input type="number" name="number_likes_min"></label>
+        <label>Макс. лайков: <input type="number" name="number_likes_max"></label>
+        <label>Мин. дата публикации: <input type="date" name="release_date_min"></label>
+        <label>Макс. дата публикации: <input type="date" name="release_date_max"></label>
+        <label>Мин. дата добавления: <input type="date" name="add_data_min"></label>
+        <label>Макс. дата добавления: <input type="date" name="add_data_max"></label>
+        <button type="button" onclick="sendRequest()">🔍 Отправить запрос</button>
+    </form>
+
+    <h2>Результаты</h2>
+    <div id="results" class="results-container"></div>
+
+    <script>
+        function sendRequest() {
+            const form = document.getElementById('filterForm');
+            const formData = new FormData(form);
+            const params = {};
+
+            formData.forEach((value, key) => {
+                if (value) params[key] = value;
+            });
+
+            fetch('http://localhost:2222/youtube/get_videos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(params)
+            })
+            .then(response => response.json())
+            .then(data => displayResults(data))
+            .catch(error => {
+                console.error('Ошибка:', error);
+                document.getElementById('results').innerHTML = '<p style="color:red;">Ошибка запроса</p>';
+            });
+        }
+
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            if (!Array.isArray(data) || data.length === 0) {
+                resultsDiv.innerHTML = '<p style="color:red;">Ничего не найдено</p>';
+                return;
+            }
+
+            data.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>${video.title}</h3>
+                    <p>📅 Дата публикации: <strong>${video.release_date || 'Неизвестно'}</strong></p>
+                    <p>📥 Дата добавления: <strong>${video.add_data || 'Неизвестно'}</strong></p>
+                    <p>👀 Просмотры: <strong>${video.views ? video.views.toLocaleString() : 'Неизвестно'} 
+                    <p>👍 Лайки: <strong>${video.likes ? video.likes.toLocaleString() : 'Неизвестно'} 
+                    <p><a href="${video.link}" target="_blank">🔗 Смотреть видео</a>
+                `;
+                resultsDiv.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

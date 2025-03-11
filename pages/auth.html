@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            max-width: 300px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #cc0000;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Авторизация</h2>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Логин" required>
+        <input type="password" id="password" placeholder="Пароль" required>
+        <button type="submit">Войти</button>
+    </form>
+
+    <button id="getUserBtn" class="hidden">Получить данные пользователя</button>
+    <button id="logoutBtn" class="hidden">Выйти</button>
+
+    <pre id="output"></pre>
+
+    <script >
+        const API_URL = "http://localhost:2222"; 
+
+document.getElementById("loginForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const formData = new URLSearchParams();
+    formData.append("username", username);
+    formData.append("password", password);
+
+    try {
+        const response = await fetch(`${API_URL}/token`, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: formData,
+        });
+
+        if (!response.ok) throw new Error("Ошибка авторизации");
+
+        const data = await response.json();
+        localStorage.setItem("access_token", data.access_token);
+        window.location.href = "../index.html";
+        // document.getElementById("output").textContent = "Успешный вход!";
+        // toggleButtons(true);
+        
+    } catch (error) {
+        document.getElementById("output").textContent = "Ошибка: " + error.message;
+    }
+});
+
+// document.getElementById("getUserBtn").addEventListener("click", async () => {
+//     const token = localStorage.getItem("access_token");
+//     if (!token) return alert("Вы не авторизованы");
+
+//     try {
+//         const response = await fetch(`${API_URL}/users/me/`, {
+//             method: "GET",
+//             headers: { "Authorization": `Bearer ${token}` },
+//         });
+
+//         if (!response.ok) throw new Error("Ошибка получения данных");
+
+//         const userData = await response.json();
+//         document.getElementById("output").textContent = JSON.stringify(userData, null, 2);
+//     } catch (error) {
+//         document.getElementById("output").textContent = "Ошибка: " + error.message;
+//     }
+// });
+
+// document.getElementById("logoutBtn").addEventListener("click", () => {
+//     localStorage.removeItem("access_token");
+//     document.getElementById("output").textContent = "Вы вышли из системы";
+//     toggleButtons(false);
+// });
+
+// function toggleButtons(isLoggedIn) {
+//     document.getElementById("getUserBtn").classList.toggle("hidden", !isLoggedIn);
+//     document.getElementById("logoutBtn").classList.toggle("hidden", !isLoggedIn);
+//     document.getElementById("loginForm").classList.toggle("hidden", isLoggedIn);
+// }
+
+// // Проверка при загрузке страницы
+// document.addEventListener("DOMContentLoaded", () => {
+//     const token = localStorage.getItem("access_token");
+//     toggleButtons(!!token);
+// });
+
+    </script>
+</body>
+</html>
