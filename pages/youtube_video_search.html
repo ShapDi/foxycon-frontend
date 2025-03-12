@@ -107,7 +107,11 @@
     <div id="results" class="results-container"></div>
 
     <script>
-            
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
         // Загрузка хедера
 
         function sendRequest() {
@@ -155,11 +159,7 @@
                 resultsDiv.appendChild(card);
             });
         }
-        fetch('pages/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-            });
+
 
     </script>
 </body>
