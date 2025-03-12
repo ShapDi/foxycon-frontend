@@ -87,6 +87,7 @@
     </style>
 </head>
 <body>
+    <div id="header"></div>
     <h2>Фильтр поиска YouTube-каналов</h2>
     <form id="filterForm">
         <label>Название канала: <input type="text" name="name_channel"></label>
@@ -108,6 +109,13 @@
     <div id="results" class="results-container"></div>
 
     <script>
+        // Загрузка хедера
+        fetch('pages/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+
         function sendRequest() {
             const form = document.getElementById('filterForm');
             const formData = new FormData(form);

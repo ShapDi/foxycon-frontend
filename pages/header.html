@@ -1,26 +1,22 @@
+<!-- header.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Красивый хедер</title>
-    <script src="js/auth.js" defer></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body {
-            font-family: Arial, sans-serif;
-        }
         .header {
             background: #333;
             color: white;
             padding: 15px 20px;
             display: flex;
-            justify-content: space-between; /* Логотип слева, навигация справа */
-            align-items: center; /* Центрирование по вертикали */
+            justify-content: space-between;
+            align-items: center;
             position: relative;
         }
         .logo {
@@ -30,9 +26,9 @@
         .nav {
             display: flex;
             gap: 20px;
-            position: absolute; /* Абсолютное позиционирование для центрирования */
-            left: 50%; /* Смещение на 50% вправо */
-            transform: translateX(-50%); /* Центрирование */
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .nav a {
             color: white;
@@ -46,7 +42,6 @@
         }
         .dropdown {
             position: relative;
-            font-size:px;
         }
         .dropdown-menu {
             display: none;
@@ -58,7 +53,6 @@
             border-radius: 5px;
             overflow: hidden;
             min-width: 150px;
-
         }
         .dropdown-menu a {
             display: block;
@@ -73,38 +67,34 @@
         .dropdown:hover .dropdown-menu {
             display: block;
         }
-
     </style>
 </head>
 <body>
-
-<header class="header">
-    <!-- <div class="logo">Логотип</div> -->
-    <div class="burger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <nav class="nav">
-        <div class="dropdown">
-            <a href="#">Главная</a>
+    <header class="header">
+        <!-- <div class="logo">Логотип</div> -->
+        <div class="burger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        
-        <div class="dropdown">
-            <a href="#">YouTube</a>
-            <div class="dropdown-menu">
-                <a href="pages/youtube_channel_search.html">Поиск каналов</a>
-                <a href="pages/youtube_video_search.html">Поиск видео</a>
+        <nav class="nav">
+            <div class="dropdown">
+                <a href="#">Главная</a>
             </div>
-        </div>
-    </nav>
-</header>
+            <div class="dropdown">
+                <a href="#">YouTube</a>
+                <div class="dropdown-menu">
+                    <a href="youtube_channel_search.html">Поиск каналов</a>
+                    <a href="youtube_video_search.html">Поиск видео</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-<script>
-    function toggleMenu() {
-        document.querySelector('.nav').classList.toggle('open');
-    }
-</script>
-
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav').classList.toggle('open');
+        }
+    </script>
 </body>
 </html>

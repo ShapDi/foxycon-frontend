@@ -87,6 +87,9 @@
     </style>
 </head>
 <body>
+    <iframe src="header.html" style="width: 100%; border: none;"></iframe>
+    <div id="header"></div>
+
     <h2>Фильтр поиска видео YouTube</h2>
     <form id="filterForm">
         <label>Название видео: <input type="text" name="title"></label>
@@ -105,6 +108,9 @@
     <div id="results" class="results-container"></div>
 
     <script>
+            
+        // Загрузка хедера
+
         function sendRequest() {
             const form = document.getElementById('filterForm');
             const formData = new FormData(form);
@@ -150,6 +156,12 @@
                 resultsDiv.appendChild(card);
             });
         }
+        fetch('pages/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+
     </script>
 </body>
 </html>
