@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Фильтр YouTube-каналов</title>
-    <script src="js/auth.js" defer></script>
+    <script src="../js/auth.js" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -109,12 +109,11 @@
     <div id="results" class="results-container"></div>
 
     <script>
-        // Загрузка хедера
         fetch('header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
-            });
+            });        
 
         function sendRequest() {
             const form = document.getElementById('filterForm');
@@ -125,9 +124,9 @@
                 if (value) params[key] = value;
             });
             console.log(params)
-            fetch('http://localhost:2222/youtube/get_channels', {
+            fetch('https://foxyconsystem.ru/youtube/get_channels', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
                 body: JSON.stringify(params)
             })
             .then(response => response.json())

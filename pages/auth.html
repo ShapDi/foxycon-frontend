@@ -3,6 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Красивый хедер</title>
+    <script src="js/auth.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background: #333;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between; /* Логотип слева, навигация справа */
+            align-items: center; /* Центрирование по вертикали */
+            position: relative;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+            position: absolute; /* Абсолютное позиционирование для центрирования */
+            left: 50%; /* Смещение на 50% вправо */
+            transform: translateX(-50%); /* Центрирование */
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .dropdown {
+            position: relative;
+            font-size:px;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            min-width: 150px;
+
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .dropdown-menu a:hover {
+            background: #f4f4f4;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <!-- <div class="logo">Логотип</div> -->
+    <div class="burger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <nav class="nav">
+        <div class="dropdown">
+            <a href="#">Главная</a>
+        </div>
+        
+        <div class="dropdown">
+            <a href="#">YouTube</a>
+            <div class="dropdown-menu">
+                <a href="pages/youtube_channel_search.html">Поиск каналов</a>
+                <a href="pages/youtube_video_search.html">Поиск видео</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+    function toggleMenu() {
+        document.querySelector('.nav').classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>root@4387055-cw73907:/home/foxycon-frontend# ls
+assets  index.html  js  pages  README.md
+root@4387055-cw73907:/home/foxycon-frontend# cd pages/
+root@4387055-cw73907:/home/foxycon-frontend/pages# ls
+auth.html  header.html  youtube_channel_search.html  youtube_video_search.html
+root@4387055-cw73907:/home/foxycon-frontend/pages# cat auth.html 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация</title>
     <style>
         body {
@@ -54,7 +169,7 @@
     <pre id="output"></pre>
 
     <script >
-        const API_URL = "http://localhost:2222"; 
+        const API_URL = "https://foxyconsystem.ru"; 
 
 document.getElementById("loginForm").addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -63,13 +178,16 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
     const password = document.getElementById("password").value;
 
     const formData = new URLSearchParams();
-    formData.append("username", username);
-    formData.append("password", password);
-
+    formData.append("grant_type", "password");
+formData.append("username", username);
+formData.append("password", password);
+formData.append("scope", "");
+formData.append("client_id", "string");
+formData.append("client_secret", "string");
     try {
         const response = await fetch(`${API_URL}/token`, {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            headers: { "Content-Type": "application/x-www-form-urlencoded","accept": "application/json" },
             body: formData,
         });
 
@@ -82,6 +200,7 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
         // toggleButtons(true);
         
     } catch (error) {
+        console.log(error)
         document.getElementById("output").textContent = "Ошибка: " + error.message;
     }
 });

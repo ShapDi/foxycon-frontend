@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Фильтр видео YouTube</title>
-    <script src="js/auth.js" defer></script>
+   <script src="../js/auth.js" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -123,7 +123,7 @@
                 if (value) params[key] = value;
             });
 
-            fetch('http://localhost:2222/youtube/get_videos', {
+            fetch('https://foxyconsystem.ru/youtube/get_videos', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(params)
