@@ -1,0 +1,17 @@
+<div id="header"></div>
+<h2>Фильтр поиска YouTube-каналов</h2>
+<form id="filterForm">
+    <label>Название канала: <input type="text" name="name_channel"></label>
+    <label>Ссылка на канал: <input type="text" name="link_channel"></label>
+    <label>Мин. просмотров: <input type="number" name="number_views_min"></label>
+    <label>Макс. просмотров: <input type="number" name="number_views_max"></label>
+    <label>Мин. дата добавления: <input type="date" name="add_data_min"></label>
+    <label>Макс. дата добавления: <input type="date" name="add_data_max"></label>
+    <label>Мин. подписчиков: <input type="number" name="number_subscribers_min"></label>
+    <label>Макс. подписчиков: <input type="number" name="number_subscribers_max"></label>
+    <label>Мин. видео: <input type="number" name="number_video_min"></label>
+    <label>Макс. видео: <input type="number" name="number_video_max"></label>
+    <label>Мин. дата создания: <input type="date" name="created_at_min"></label>
+    <label>Макс. дата создания: <input type="date" name="created_at_max"></label>
+    <button type="button" onclick="sendRequest()">🔍 Отправить запрос</button>
+</form>

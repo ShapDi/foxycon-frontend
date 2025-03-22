@@ -1,0 +1,15 @@
+<div id="header"></div>
+
+<h2>Фильтр поиска видео YouTube</h2>
+<form id="filterForm">
+    <label>Название видео: <input type="text" name="title"></label>
+    <label>Мин. просмотров: <input type="number" name="number_views_min"></label>
+    <label>Макс. просмотров: <input type="number" name="number_views_max"></label>
+    <label>Мин. лайков: <input type="number" name="number_likes_min"></label>
+    <label>Макс. лайков: <input type="number" name="number_likes_max"></label>
+    <label>Мин. дата публикации: <input type="date" name="release_date_min"></label>
+    <label>Макс. дата публикации: <input type="date" name="release_date_max"></label>
+    <label>Мин. дата добавления: <input type="date" name="add_data_min"></label>
+    <label>Макс. дата добавления: <input type="date" name="add_data_max"></label>
+    <button type="button" onclick="sendRequest()">🔍 Отправить запрос</button>
+</form>
