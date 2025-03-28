@@ -1,33 +1,52 @@
 h2 {
     text-align: center;
+    color: #AE4B2F;
 }
-form {
-    background: white;
+.conteiner-form {
+    display: flex;
+    background: #F9E0C0;
     padding: 15px;
-    max-width: 600px;
+    height: 300px; 
+    /* max-width: 900px; */
     margin: 0 auto;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    justify-content: space-around;
 }
+
+
+
 label {
     display: block;
     margin: 5px 0;
+    
 }
 input {
-    width: 100%;
-    padding: 5px;
-    margin-top: 2px;
+    width: 200px;
+    height: 30px;
+
+    background: #5E4B4B;
+    border-radius: 20px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 20px;
+
+    color: #DA9E70;
+    
 }
 button {
     display: block;
     width: 100%;
     padding: 10px;
-    background: #ff0000;
-    color: white;
+    background: #AE4B2F;
+    color: #DA9E70;
+    font-size: 20px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
+
 }
 button:hover {
     background: #cc0000;
@@ -48,6 +67,7 @@ button:hover {
     text-align: center;
 }
 .card h3 {
+    
     margin: 0 0 10px;
     font-size: 18px;
     color: #333;
@@ -70,3 +90,25 @@ button:hover {
 .card a:hover {
     background-color: #cc0000;
 }
+
+.conteiner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.conteiner-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.conteiner-2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+

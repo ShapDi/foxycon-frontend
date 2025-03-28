@@ -1,15 +1,52 @@
 <div id="header"></div>
 
-<h2>Фильтр поиска видео YouTube</h2>
-<form id="filterForm">
-    <label>Название видео: <input type="text" name="title"></label>
-    <label>Мин. просмотров: <input type="number" name="number_views_min"></label>
-    <label>Макс. просмотров: <input type="number" name="number_views_max"></label>
-    <label>Мин. лайков: <input type="number" name="number_likes_min"></label>
-    <label>Макс. лайков: <input type="number" name="number_likes_max"></label>
-    <label>Мин. дата публикации: <input type="date" name="release_date_min"></label>
-    <label>Макс. дата публикации: <input type="date" name="release_date_max"></label>
-    <label>Мин. дата добавления: <input type="date" name="add_data_min"></label>
-    <label>Макс. дата добавления: <input type="date" name="add_data_max"></label>
-    <button type="button" onclick="sendRequest()">🔍 Отправить запрос</button>
-</form>
+
+
+    <form id="filterForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h2>Фильтр поиска видео YouTube</h2>
+        <div class="conteiner-form">
+            
+            <div class="conteiner-1">
+                <div>Название видео</div>
+                <label><input formControlName="title" type="text" name="title"></label>
+                <div>Мин. просмотров</div>
+                <label><input formControlName="number_views_min" type="number" name="number_views_min"></label>
+                <div>Макс. просмотров</div>
+                <label><input formControlName="number_views_max" type="number" name="number_views_max"></label>
+            </div>
+            <div class="conteiner">
+                <div>Мин. лайков</div>
+                <label><input formControlName="number_likes_min" type="number" name="number_likes_min"></label>
+                <div>Макс. лайков</div>
+                <label><input formControlName="number_likes_max" type="number" name="number_likes_max"></label>
+                <div>Мин. дата публикации</div>
+                <label><input formControlName="release_date_min" type="date" name="release_date_min"></label>
+            </div>
+            <div class="conteiner-2">
+                <div>Макс. дата публикации</div>
+                <label><input formControlName="release_date_max" type="date" name="release_date_max"></label>
+                <div>Мин. дата добавления</div>
+                <label><input formControlName="add_data_min" type="date" name="add_data_min"></label>
+                <div>Макс. дата добавления</div>
+                <label><input formControlName="add_data_max" type="date" name="add_data_max"></label>
+            </div>
+        </div>
+        <button type="submit">Поиск</button>
+
+    </form>
+
+<app-card-video *ngFor="let data_cart of profiles"  [data_cart]="data_cart"> </app-card-video> 
+<app-cart-pagination-widget [page_num_con]="page" ></app-cart-pagination-widget>
+<pre>
+    <!-- {{profiles[0].id}} -->
+
+
+
+
+    <!-- @for (profile of profiles; track profile.id) {
+        <h2> </h2>
+    } -->
+
+    <!-- <app-pagination-widget *ngFor="let page_num of page"  [page_num]="page_num"> </app-pagination-widget> -->
+
+</pre>

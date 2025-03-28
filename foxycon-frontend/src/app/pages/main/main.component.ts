@@ -13,7 +13,7 @@ export class MainComponent {
   youtubeApiService = inject(YoutubeApiService)
   profiles: Video[] = []
 
-  constructor(){
-    this.youtubeApiService.getYoutubeVideos().subscribe(val => {this.profiles = val})
-  }
+  // constructor(){
+  //   this.youtubeApiService.getYoutubeVideos().subscribe(val => {this.profiles = val})
+  // }
 }

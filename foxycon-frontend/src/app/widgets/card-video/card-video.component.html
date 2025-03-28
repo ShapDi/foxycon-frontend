@@ -1,1 +1,27 @@
-<p>card-video works!</p>
+<div class="conteiner-card">
+    <div conteiner-info>
+        <p>Название</p>
+        {{data_cart.title}}
+    </div>
+    <div conteiner-info >
+        <p>Просмотры</p>
+        {{data_cart.views}}
+        <p>Количество лайков</p>
+        {{data_cart.likes}}
+    </div>
+    <!-- <div conteiner-info>
+
+    </div> -->
+
+    <div conteiner-info>
+        <p>Дата релиза</p>
+        {{data_cart.release_date}}
+        <p>Дата добавления в систему</p>
+        {{data_cart.add_data}}
+    </div>
+
+    <div conteiner-info>
+
+    </div>
+    <div conteiner-info><a target="_blank" href={{data_cart.link}}>Передти  на видос</a></div>
+</div>

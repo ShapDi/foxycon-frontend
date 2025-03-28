@@ -1,20 +1,22 @@
-<div class="main_conteiner">
-    <div class="main_form">
-        <h2>Авторизация</h2>
-        <form id="loginForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="container">
+
+        <div class="main_form">
             
-            <input formControlName="username" type="text" id="username" placeholder="Логин" required>
-            <input formControlName="password" type="password" id="password" placeholder="Пароль" required>
-            <button type="submit">Войти</button>
-        </form>
 
-    </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()"> 
+                <div class="container-form">
+                    <div><h2>Авторизация</h2></div>
+                    <div><input  formControlName="username" type="text" id="username" placeholder="Логин" required></div>
+                    <div><input formControlName="password" type="password" id="password" placeholder="Пароль" required></div>
+                    <div><button type="submit">Войти</button></div>
+                </div>
 
-    <div class="logo">
-        <img src="foxycon-frontend\public\logo.png" alt="">
-    </div>
+            </form>
 
-</div>
+        </div>
+
+        </div>
+
 
 
 

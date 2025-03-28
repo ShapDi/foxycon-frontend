@@ -1,0 +1,26 @@
+.conteiner-card {
+    display: flex;
+    background: #F9E0C0;
+    /* padding: 15px; */
+    height: 150px; 
+    margin: 20px;
+    
+    /* max-width: 900px; */
+    /* margin: 0 auto; */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+}
+
+.conteiner-info {
+    /* display: flex;
+    background: #F9E0C0;
+    padding: 15px;
+    height: 300px; 
+    /* max-width: 900px; */
+    /* margin: 0 auto; */
+    border-radius: 8px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    justify-content: space-around; 
+}
+

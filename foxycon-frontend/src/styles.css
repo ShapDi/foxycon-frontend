@@ -1,9 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-    --grey-color:#808080
+    --grey-color:#5E4B4B
 }
 
 body {
     background: var(--grey-color);
+
+    max-width: 1024px;
+    margin: 0 auto; /* Центрирование */
+    padding: 0 10px; /* Небольшие отступы по краям */
+    box-sizing: border-box;
+      
 }

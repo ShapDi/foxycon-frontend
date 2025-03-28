@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { VideoItem } from '../../services/youtubeapi.interfece';
 
 @Component({
   selector: 'app-card-video',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './card-video.component.css'
 })
 export class CardVideoComponent {
-
+  @Input() data_cart!:VideoItem;
 }

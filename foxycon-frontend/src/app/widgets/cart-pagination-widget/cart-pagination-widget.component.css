@@ -1,0 +1,10 @@
+.conteiner {
+
+    width: 956px;
+    height: 91px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
