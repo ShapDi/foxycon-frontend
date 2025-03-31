@@ -9,7 +9,7 @@ import { CardVideoComponent } from '../card-video/card-video.component';
 
 @Component({
   selector: 'app-form-video-search',
-  imports: [ReactiveFormsModule, CartPaginationWidgetComponent, CardVideoComponent,NgFor],
+  imports: [ReactiveFormsModule, PaginationWidgetComponent, CardVideoComponent,NgFor],
   templateUrl: './form-video-search.component.html',
   styleUrl: './form-video-search.component.css'
 })

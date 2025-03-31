@@ -1,3 +1,5 @@
-<div class="cart-page">
-    <div class="num-page">{{page_num}}</div>
+
+
+<div class="conteiner">
+    <app-cart-pagination-widget *ngFor="let page_num of page"  [page_num]="page_num" (click)="onClick(page_num)"> </app-cart-pagination-widget> 
 </div>
