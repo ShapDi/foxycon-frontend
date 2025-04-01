@@ -63,13 +63,21 @@ export class YoutubeApiService {
     release_date_max:string | null,
     add_data_min:string | null,
     add_data_max:string | null,
-  }): Observable<any> {
+    offset:number | null | undefined,
+    limit:number | null | undefined,
+  },
+  offset:number,
+  limit:number): Observable<any> {
     const url = 'http://127.0.0.1:2222/youtube/get_videos?key=B00XgwofN.Aw';
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Content-Type': 'application/json'
     });
-    const body = video_data;
+    var data = video_data;
+    data['offset'] = offset;
+    data['limit'] = limit;
+    console.log(data);
+    const body = data;
     // <Video[]>
     return this.http.post<VideoResponse>(url, body, { headers: headers });
   }

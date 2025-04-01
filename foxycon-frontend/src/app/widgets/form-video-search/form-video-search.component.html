@@ -34,19 +34,6 @@
         <button type="submit">Поиск</button>
 
     </form>
-
+<app-pagination-widget [page_num_con]="page" (incrementCountEvent)="logValue($event)"></app-pagination-widget>
 <app-card-video *ngFor="let data_cart of profiles"  [data_cart]="data_cart"> </app-card-video> 
-<app-pagination-widget [page_num_con]="page" ></app-pagination-widget>
-<pre>
-    <!-- {{profiles[0].id}} -->
 
-
-
-
-    <!-- @for (profile of profiles; track profile.id) {
-        <h2> </h2>
-    } -->
-
-    <!-- <app-pagination-widget *ngFor="let page_num of page"  [page_num]="page_num"> </app-pagination-widget> -->
-
-</pre>

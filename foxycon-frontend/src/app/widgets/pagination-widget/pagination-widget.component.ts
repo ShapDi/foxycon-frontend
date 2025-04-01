@@ -25,11 +25,12 @@ export class PaginationWidgetComponent {
   }
 
   onClick(page_num:number) {
-    this.incrementCountEvent.emit(this.itemsPerPage);
+
     console.log(page_num)
     this.currentPage = page_num
     this.page = this.getPageNumbers(this.page_num_con, this.itemsPerPage, this.currentPage);
-    console.log(page_num)
+    this.incrementCountEvent.emit(this.currentPage);
+    // console.log(page_num)
 }
 
 getPageNumbers(

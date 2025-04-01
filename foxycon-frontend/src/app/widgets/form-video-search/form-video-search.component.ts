@@ -18,7 +18,6 @@ export class FormVideoSearchComponent {
   youtubeApiService = inject(YoutubeApiService)
   profiles:YouTubeVideo[] = []
   currentPage = signal(0);
-  totalPages = signal(0);
   pageSize = 10;
 
   form = new FormGroup({
@@ -31,6 +30,8 @@ export class FormVideoSearchComponent {
     release_date_max: new FormControl(null),
     add_data_min: new FormControl(null),
     add_data_max: new FormControl(null),
+    offset: new FormControl<number | null>(0),
+    limit: new FormControl<number | null>(10),
   })
 
   onPageChanged(newPage: number) {
@@ -38,12 +39,32 @@ export class FormVideoSearchComponent {
     this.onSubmit();
   }
 
+  logValue(event: number) {
+    const formValue = this.form.value;
+    const dataForApi = {
+      ...formValue,
+      offset: 0,   // дефолтное значение
+      limit: 10,   // дефолтное значение
+    };
+    console.log(event)
+    //@ts-ignore
+    this.youtubeApiService.getYoutubeVideo(this.form.value,(event-1)*10,10).subscribe(val => {
+      this.profiles = val.content;
+      this.page = val.count; // предполагая, что getPageNumbers - метод компонента
+      console.log(this.profiles); // переместим console.log внутрь подписки
+    });
+  console.log(this.profiles)
+  console.log(this.page)
+  }
+
   onSubmit() {
+
     // console.log(this.form.value)
     if (this.form.valid){
+      this.page = 0;
       console.log(this.form.value)
         //@ts-ignore
-        this.youtubeApiService.getYoutubeVideo(this.form.value).subscribe(val => {
+        this.youtubeApiService.getYoutubeVideo(this.form.value, 0,10).subscribe(val => {
           this.profiles = val.content;
           this.page = val.count; // предполагая, что getPageNumbers - метод компонента
           console.log(this.profiles); // переместим console.log внутрь подписки

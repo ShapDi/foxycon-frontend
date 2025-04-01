@@ -1,11 +1,10 @@
 
 
 .cart-page{
-    width: 102px;
-    height: 91px;
-    left: 243px;
-    top: 2797px;
+    width: 51px;
+    height: 40px;
 
+    margin: 5px;
     background: #F9E0C0;
 
     display: flex;
@@ -16,7 +15,7 @@
     border-radius: 20px;
 }
 
-/* 1 */
+
 .num-page{
     
     font-family: 'Inter';
@@ -24,9 +23,6 @@
     font-weight: 400;
     font-size: 36px;
     line-height: 44px;
-    /* identical to box height */
-
-    
     color: #AE4B2F;
 }
 
