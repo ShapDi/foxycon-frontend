@@ -1,1 +1,20 @@
-<p>form-inspection-channel works!</p>
+<div id="header"></div>
+
+
+
+    <form id="filterForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h2>Проверка канала в базе MB</h2>
+        <div class="conteiner-form">
+            
+            <div class="conteiner-1">
+                <div>Добавь ссылку на канал в любом формате </div>
+                <label><input formControlName="link" type="text" name="link"></label> 
+            </div>
+        </div>
+        <button type="submit">Проверка</button>
+        <div class="conteiner-resalt">
+            <div class="conteiner-1">
+                {{link_status}}
+            </div>
+        </div>  
+    </form>

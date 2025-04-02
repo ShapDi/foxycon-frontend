@@ -1,0 +1,37 @@
+.conteiner {
+    display: flex;
+}
+
+.text_main {
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 77px;
+text-align: justify;
+
+color: #AE4B2F;
+
+
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    /* Это система хранения и получения собранного контента из единой базы для последующего использования Предлагаемые кейсы использования FoxyCon Save System Поиск новых блогеров для публикации Проверка найдены каналов в общей MediaBuying */
+
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+
+    color: #DA9E70;
+
+
+}

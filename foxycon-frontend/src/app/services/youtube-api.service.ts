@@ -82,6 +82,18 @@ export class YoutubeApiService {
     return this.http.post<VideoResponse>(url, body, { headers: headers });
   }
 
+  inspectionChannel(link:{
+    link:string | null
+  }){
+    const headers = new HttpHeaders({
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
+    const body = link;
+    const url = 'http://127.0.0.1:2222/youtube/inspection_channel_org?key=B00XgwofN.Aw';
+    return this.http.post(url, body, { headers: headers });
+  }
+
 }
 
 
