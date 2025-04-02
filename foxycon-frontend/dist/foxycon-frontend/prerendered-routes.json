@@ -1,0 +1,9 @@
+{
+  "routes": {
+    "/": {},
+    "/auth": {},
+    "/channel_inspection": {},
+    "/channel_search": {},
+    "/video_search": {}
+  }
+}
