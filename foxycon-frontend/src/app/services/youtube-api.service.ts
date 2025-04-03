@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Video, VideoResponse, YouTubeChannel, YouTubeVideo } from './youtubeapi.interfece';
 import { ConfigService } from './config.service';
+import { Operation, SocialMedia } from '../utils/enums';
 
 @Injectable({
   providedIn: 'root'
