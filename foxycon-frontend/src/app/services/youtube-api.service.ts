@@ -43,7 +43,7 @@ export class YoutubeApiService {
     
     
   ): Observable<any> {
-    const url = 'http://127.0.0.1:2222/youtube/get_channels?key=B00XgwofN.Aw';
+    const url = 'https://foxyconsystem.ru/youtube/get_channels?key=B00XgwofN.Aw';
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ export class YoutubeApiService {
   },
   offset:number,
   limit:number): Observable<any> {
-    const url = 'http://127.0.0.1:2222/youtube/get_videos?key=B00XgwofN.Aw';
+    const url = 'https://foxyconsystem.ru/youtube/get_videos?key=B00XgwofN.Aw';
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ export class YoutubeApiService {
       'Content-Type': 'application/json'
     });
     const body = link;
-    const url = 'http://127.0.0.1:2222/youtube/inspection_channel_org?key=B00XgwofN.Aw';
+    const url = 'https://foxyconsystem.ru/youtube/inspection_channel_org?key=B00XgwofN.Aw';
     return this.http.post(url, body, { headers: headers });
   }
 

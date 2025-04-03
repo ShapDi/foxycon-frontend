@@ -5,7 +5,7 @@ import { Video } from '../../services/youtubeapi.interfece';
 import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-main',
-  imports: [HeaderRoutersComponent, JsonPipe],
+  imports: [HeaderRoutersComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })

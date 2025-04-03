@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { TokenResponse } from './user-management.interfece';
@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserManagementService {
   http = inject(HttpClient)
   
-  baseApiUrl= 'http://127.0.0.1:2222/user_management'
+  baseApiUrl= 'https://foxyconsystem.ru/user_management'
 
   cookerServece = inject(CookieService)
   token:string | null = null 
@@ -29,10 +29,18 @@ export class UserManagementService {
     const fd = new FormData()
     console.log(payload.username)
 
-    fd.append('username', payload.username)
-    fd.append('password', payload.password)
-
-    return this.http.post<TokenResponse>(`${this.baseApiUrl}/token`, fd
+    const body = new URLSearchParams();
+    body.set('grant_type', 'password');
+    body.set('username', payload.username);
+    body.set('password', payload.password);
+    body.set('scope', '');
+    body.set('client_id', 'string');
+    body.set('client_secret', 'string');
+    const headers = new HttpHeaders({
+      'accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+    return this.http.post<TokenResponse>(`${this.baseApiUrl}/token`, body,{ headers: headers }
 
     ).pipe(tap(val => {
       this.token = val.access_token
