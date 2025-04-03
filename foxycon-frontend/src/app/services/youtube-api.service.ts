@@ -2,12 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Video, VideoResponse, YouTubeChannel, YouTubeVideo } from './youtubeapi.interfece';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YoutubeApiService {
   http = inject(HttpClient)
+  config = inject(ConfigService)
   constructor() { }
 
   // getYoutubeVideos(numberViewsMin: number = 0, numberLikesMin: number = 0): Observable<any> {
@@ -43,7 +45,7 @@ export class YoutubeApiService {
     
     
   ): Observable<any> {
-    const url = 'https://foxyconsystem.ru/youtube/get_channels?key=B00XgwofN.Aw';
+    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetChannels}?key=${this.config.apiKey}`;
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Content-Type': 'application/json'
@@ -68,7 +70,7 @@ export class YoutubeApiService {
   },
   offset:number,
   limit:number): Observable<any> {
-    const url = 'https://foxyconsystem.ru/youtube/get_videos?key=B00XgwofN.Aw';
+    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetVideos}?key=${this.config.apiKey}`;
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Content-Type': 'application/json'
@@ -90,7 +92,7 @@ export class YoutubeApiService {
       'Content-Type': 'application/json'
     });
     const body = link;
-    const url = 'https://foxyconsystem.ru/youtube/inspection_channel_org?key=B00XgwofN.Aw';
+    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.InspectChannel}?key=${this.config.apiKey}`;
     return this.http.post(url, body, { headers: headers });
   }
 

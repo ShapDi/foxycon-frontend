@@ -4,14 +4,16 @@ import { tap } from 'rxjs';
 import { TokenResponse } from './user-management.interfece';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserManagementService {
   http = inject(HttpClient)
+  config = inject(ConfigService)
   
-  baseApiUrl= 'https://foxyconsystem.ru/user_management'
+  baseApiUrl= `${this.config.apiUrl}/user_management`
 
   cookerServece = inject(CookieService)
   token:string | null = null 
