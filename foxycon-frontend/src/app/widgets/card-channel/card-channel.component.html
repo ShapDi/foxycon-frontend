@@ -1,1 +1,27 @@
-<p>card-channel works!</p>
+<div class="conteiner-card">
+    <div conteiner-info>
+        <p>Название канала</p>
+        {{data_cart.name_channel}}
+    </div>
+    <div conteiner-info >
+        <p>Просмотры</p>
+        {{data_cart.total_views}}
+        <p>Количество подписчиков</p>
+        {{data_cart.number_subscribers}}
+    </div>
+    <!-- <div conteiner-info>
+
+    </div> -->
+
+    <div conteiner-info>
+        <p>Дата создания</p>
+        {{data_cart.created_at}}
+        <p>Дата добавления в систему</p>
+        {{data_cart.add_data}}
+    </div>
+
+    <div conteiner-info>
+
+    </div>
+    <div conteiner-info><a target="_blank" href={{data_cart.link_channel}}>Передти на канал</a></div>
+</div>

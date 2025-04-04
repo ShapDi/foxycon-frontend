@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Video, VideoResponse, YouTubeChannel, YouTubeVideo } from './youtubeapi.interfece';
+import { Video, VideoResponse, YoutubeChannel, YouTubeVideo } from './youtubeapi.interfece';
 import { ConfigService } from './config.service';
 import { Operation, SocialMedia } from '../utils/enums';
 
@@ -42,7 +42,9 @@ export class YoutubeApiService {
     number_video_max:number| null,
     created_at_min:string| null,
     created_at_max:string| null,
-  }
+    offset:number | null | undefined,
+    limit:number | null | undefined,
+  },offset: number,limit:number
     
     
   ): Observable<any> {
@@ -51,9 +53,12 @@ export class YoutubeApiService {
       'accept': 'application/json',
       'Content-Type': 'application/json'
     });
-    const body = channel_data;
-    // <Video[]>
-    return this.http.post<YouTubeChannel[]>(url, body, { headers: headers });
+    var data = channel_data;
+    data['offset'] = offset;
+    data['limit'] = limit;
+    console.log(data);
+    const body = data;
+    return this.http.post<YoutubeChannel[]>(url, body, { headers: headers });
   }
 
   getYoutubeVideo(video_data: {

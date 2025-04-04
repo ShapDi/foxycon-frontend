@@ -19,19 +19,19 @@ export interface CountrySystemYouTube {
     id: string;
   }
   
-  export interface YouTubeChannel {
-    link_channel: string;
-    add_data: string;
-    total_views: number;
-    number_video: number;
-    youtube_id: string;
-    id: string;
-    name_channel: string;
-    updating_data: string | null;
-    number_subscribers: number;
-    created_at: string;
-    country_system_youtube: CountrySystemYouTube[];
-  }
+  // export interface YouTubeChannel {
+  //   link_channel: string;
+  //   add_data: string;
+  //   total_views: number;
+  //   number_video: number;
+  //   youtube_id: string;
+  //   id: string;
+  //   name_channel: string;
+  //   updating_data: string | null;
+  //   number_subscribers: number;
+  //   created_at: string;
+  //   country_system_youtube: CountrySystemYouTube[];
+  // }
 
 
 export interface TypeFormat {
@@ -77,4 +77,30 @@ export interface VideoItem {
 export interface VideoResponse {
   count: number;
   content: VideoItem[];
+}
+
+
+export interface CountrySystemYoutube {
+  name: string;
+  id: string;
+}
+
+
+export interface YoutubeChannel {
+  youtube_id: string;
+  id: string;
+  name_channel: string;
+  updating_data: string | null;
+  number_subscribers: number;
+  created_at: string; // или можно использовать Date, если будет преобразовываться
+  link_channel: string;
+  add_data: string; // или Date
+  total_views: number;
+  number_video: number;
+  country_system_youtube: CountrySystemYoutube[];
+}
+
+export interface YoutubeChannelResponse {
+  count: number;
+  content: YoutubeChannel[];
 }

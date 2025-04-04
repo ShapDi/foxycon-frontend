@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { YoutubeApiService } from '../../services/youtube-api.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { YouTubeChannel, YouTubeVideo } from '../../services/youtubeapi.interfece';
+import { YoutubeChannel, YouTubeVideo } from '../../services/youtubeapi.interfece';
 import { JsonPipe, NgFor } from '@angular/common';
 import { PaginationWidgetComponent } from '../pagination-widget/pagination-widget.component';
 import { CartPaginationWidgetComponent } from '../cart-pagination-widget/cart-pagination-widget.component';
@@ -43,15 +43,15 @@ export class FormVideoSearchComponent {
     const formValue = this.form.value;
     const dataForApi = {
       ...formValue,
-      offset: 0,   // дефолтное значение
-      limit: 10,   // дефолтное значение
+      offset: 0,   
+      limit: 10,   
     };
     console.log(event)
     //@ts-ignore
     this.youtubeApiService.getYoutubeVideo(this.form.value,(event-1)*10,10).subscribe(val => {
       this.profiles = val.content;
-      this.page = val.count; // предполагая, что getPageNumbers - метод компонента
-      console.log(this.profiles); // переместим console.log внутрь подписки
+      this.page = val.count; 
+      console.log(this.profiles); 
     });
   console.log(this.profiles)
   console.log(this.page)
@@ -66,8 +66,8 @@ export class FormVideoSearchComponent {
         //@ts-ignore
         this.youtubeApiService.getYoutubeVideo(this.form.value, 0,10).subscribe(val => {
           this.profiles = val.content;
-          this.page = val.count; // предполагая, что getPageNumbers - метод компонента
-          console.log(this.profiles); // переместим console.log внутрь подписки
+          this.page = val.count;
+          console.log(this.profiles); 
         });
       console.log(this.profiles)
       console.log(this.page)
