@@ -1,40 +1,22 @@
+<div class="routers ml10">
+    <button class="logo-button" (click)="onClick('')">
+        <img class="routers-logo" src="/assets/png/Logo-small.png" alt="">
+    </button>
 
-
-        <!-- <header class="header">
-            <div class="burger" onclick="toggleMenu()">
-            </div>
-            <nav class="nav">
-                <div class="dropdown">
-                    <a href="#">Главная</a>
-                </div>
-                
-                <div class="dropdown">
-                    <a href="#">YouTube</a>
-                    <div class="dropdown-menu">
-                        <a href="/channel_search">Поиск каналов</a>
-                        <a href="/video_search">Поиск видео</a>
-                    </div>
-                </div>
-            </nav>
-        </header> -->
-
-        
-
-<header class="conteiner">
-    <nav class="nav">
-        <div class="dropdown">
-            <a href="#">Telegram</a>
-        </div>
-        <div class="dropdown">
-            <a href="#">Главная</a>
-        </div>
-        <div class="dropdown">
-            <a href="#">YouTube</a>
-            <div class="dropdown-menu">
-                <a href="/channel_search">Поиск каналов</a>
-                <a href="/video_search">Поиск видео</a>
-                <a href="/channel_inspection">Проверка канала</a>
-            </div>
-        </div>
+    <nav>
+        <ul class="routers-list">
+            <li>
+                <button class="router-item" (click)="onClick('telegram')">
+                    <img class="router-item-icon" src="/assets/svg/telegram.svg">
+                    <span>Telegram</span>
+                </button>
+            </li>
+            <li>
+                <button class="router-item" (click)="onClick('youtube')">
+                    <img class="router-item-icon" src="/assets/svg/youtube.svg">
+                    <span>YouTube</span>
+                </button>
+            </li>
+        </ul>
     </nav>
-</header>
+</div>

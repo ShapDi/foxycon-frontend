@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-auth-page',
   imports: [ReactiveFormsModule],
   templateUrl: './auth-page.component.html',
-  styleUrl: './auth-page.component.css'
+  styleUrl: './auth-page.component.scss'
 })
 export class AuthPageComponent {
   authService = inject(UserManagementService)

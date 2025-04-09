@@ -4,7 +4,7 @@ import { HeaderRoutersComponent } from '../../widgets/header-routers/header-rout
 
 @Component({
   selector: 'app-inspection-channel-page',
-  imports: [HeaderRoutersComponent,FormInspectionChannelComponent],
+  imports: [FormInspectionChannelComponent],
   templateUrl: './inspection-channel-page.component.html',
   styleUrl: './inspection-channel-page.component.css'
 })

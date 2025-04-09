@@ -1,22 +1,8 @@
-    <div class="container">
-
-        <div class="main_form">
-            
-
-            <form [formGroup]="form" (ngSubmit)="onSubmit()"> 
-                <div class="container-form">
-                    <div><h2>Авторизация</h2></div>
-                    <div><input  formControlName="username" type="text" id="username" placeholder="Логин" required></div>
-                    <div><input formControlName="password" type="password" id="password" placeholder="Пароль" required></div>
-                    <div><button type="submit">Войти</button></div>
-                </div>
-
-            </form>
-
-        </div>
-
-        </div>
-
-
-
-
+<form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label class="header">Нырок в лисью норку</label>
+    <div class="inputs">
+        <input class="input" formControlName="username" type="text" placeholder="Логин" required>
+        <input class="input" formControlName="password" type="password" placeholder="Пароль" required>
+    </div>
+    <button class="button" type="submit">Войти</button>
+</form>

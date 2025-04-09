@@ -1,0 +1,46 @@
+.routers{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 180px;
+    height: 85px;
+}
+
+.routers-logo{
+    width: 85px;
+    height: 85px;
+}
+
+.logo-button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.routers-list {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 5px;
+    list-style: none;
+    padding-left: 5px;
+    height: 85px;
+    margin: 0;
+    align-items: end;
+}
+
+.router-item {
+    border: none;
+    border-radius: 10px;
+    background-color: var(--orange-color);
+    color: white;
+    display: grid;
+    grid-template-columns: 20px 60px;
+    grid-template-rows: 20px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.router-item-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+}

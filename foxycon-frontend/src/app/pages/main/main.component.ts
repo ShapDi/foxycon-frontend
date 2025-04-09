@@ -5,9 +5,9 @@ import { Video } from '../../services/youtubeapi.interfece';
 import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-main',
-  imports: [HeaderRoutersComponent],
+  imports: [],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.css'
+  styleUrl: './main.component.scss'
 })
 export class MainComponent {
   youtubeApiService = inject(YoutubeApiService)

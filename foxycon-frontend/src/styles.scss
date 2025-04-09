@@ -1,0 +1,40 @@
+@use "fonts";
+@use "margins";
+
+:root {
+    --background-color:#231E20;
+    --orange-color:#AE4B2F;
+    --light-gray-color: #939192;
+    --dark-color:#1A1618;
+}
+
+body {
+    background: var(--background-color);
+    color: white;
+    font-family: 'Jura';
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.button {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Jura';
+    font-size: 32px;
+    background: var(--orange-color);
+    height: 50px;
+    cursor: pointer;
+}
+
+.input {
+    border-color: var(--orange-color);
+    border-radius: 5px;
+    color: var(--light-gray-color);
+    background: none;
+    font-family: 'Jura';
+    font-size: 32px;
+    padding-left: 10px;
+    height: 50px;
+    outline: none;
+}

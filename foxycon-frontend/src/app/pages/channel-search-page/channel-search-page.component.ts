@@ -4,7 +4,7 @@ import { HeaderRoutersComponent } from '../../widgets/header-routers/header-rout
 
 @Component({
   selector: 'app-channel-search-page',
-  imports: [HeaderRoutersComponent,FormChannelSearchComponent],
+  imports: [FormChannelSearchComponent],
   templateUrl: './channel-search-page.component.html',
   styleUrl: './channel-search-page.component.css'
 })

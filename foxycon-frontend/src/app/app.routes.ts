@@ -6,11 +6,17 @@ import { ChannelSearchPageComponent } from './pages/channel-search-page/channel-
 import { VideoSearchPageComponent } from './pages/video-search-page/video-search-page.component';
 import { InspectionVideoPageComponent } from './pages/inspection-video-page/inspection-video-page.component';
 import { InspectionChannelPageComponent } from './pages/inspection-channel-page/inspection-channel-page.component';
+import { LayoutComponent } from './common-ui/layout/layout.component';
 
 export const routes: Routes = [
-    {path: '', component: MainComponent, canActivate: [canActivateAuth]},
-    {path: 'channel_search', component:ChannelSearchPageComponent, canActivate: [canActivateAuth]},
-    {path: 'video_search', component:VideoSearchPageComponent, canActivate: [canActivateAuth]},
-    {path: 'channel_inspection', component:InspectionChannelPageComponent, canActivate: [canActivateAuth]},
-    {path: 'auth', component:AuthPageComponent},
+    {
+        path: '', component: LayoutComponent, children: [
+            { path: '', component: MainComponent, canActivate: [canActivateAuth] },
+            { path: 'channel_search', component: ChannelSearchPageComponent, canActivate: [canActivateAuth] },
+            { path: 'video_search', component: VideoSearchPageComponent, canActivate: [canActivateAuth] },
+            { path: 'channel_inspection', component: InspectionChannelPageComponent, canActivate: [canActivateAuth] },
+            { path: 'youtube', redirectTo: 'video_search', pathMatch: 'full'}
+        ]
+    },
+    { path: 'auth', component: AuthPageComponent },
 ];

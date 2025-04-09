@@ -4,7 +4,7 @@ import { FormVideoSearchComponent } from '../../widgets/form-video-search/form-v
 
 @Component({
   selector: 'app-video-search-page',
-  imports: [HeaderRoutersComponent, FormVideoSearchComponent],
+  imports: [FormVideoSearchComponent],
   templateUrl: './video-search-page.component.html',
   styleUrl: './video-search-page.component.css'
 })
