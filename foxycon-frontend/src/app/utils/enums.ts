@@ -7,3 +7,15 @@ export enum Operation{
     GetChannels = "get_channels",
     InspectChannel = "inspection_channel_org"
 }
+
+export enum FilterPreset{
+    AllOrRange = 'all_or_range',
+    AllOrRangeDate = 'all_or_range_date',
+    AllOrSingleString = 'all_or_single_string',
+    AllOrSingleNumber = 'all_or_single_number',
+}
+
+export enum FilterMap{
+    VideoSearch = 'video_search',
+    ChannelSearch = 'channel_search'
+}

@@ -1,0 +1,14 @@
+<div class="filters-wrapper m10">
+    <label>{{ label }}</label>
+
+    <div class="filters">
+        @for (filter of getFilters() | keyvalue; track $index) {
+            <app-filter
+            [label]="filter.key"
+            [options]="filter.value"
+            ></app-filter>
+        }
+    </div>
+
+    <button class="button">Применить</button>
+</div>

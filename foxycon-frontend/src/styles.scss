@@ -6,6 +6,7 @@
     --orange-color:#AE4B2F;
     --light-gray-color: #939192;
     --dark-color:#1A1618;
+    --light-dark-color: #272325;
 }
 
 body {
@@ -37,4 +38,8 @@ body {
     padding-left: 10px;
     height: 50px;
     outline: none;
+}
+
+.no-select{
+    user-select: none;
 }
