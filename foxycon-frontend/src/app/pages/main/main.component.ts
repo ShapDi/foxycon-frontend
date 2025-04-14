@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { HeaderRoutersComponent } from '../../widgets/header-routers/header-routers.component';
 import { YoutubeApiService } from '../../services/youtube-api.service';
-import { Video } from '../../services/youtubeapi.interfece';
+import { YouTubeVideo } from '../../services/youtubeapi.interfece';
 import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-main',
@@ -11,5 +11,5 @@ import { JsonPipe } from '@angular/common';
 })
 export class MainComponent {
   youtubeApiService = inject(YoutubeApiService)
-  profiles: Video[] = []
+  profiles: YouTubeVideo[] = []
 }

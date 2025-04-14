@@ -1,0 +1,11 @@
+<div class="tabs">
+    <div class="tab-titles">
+        @for (tab of tabs; track $index) {
+            <div class="tab-title no-select" [class.active]="selectedTab === $index" (click)="selectTab($index)">
+                {{tab.title}}
+            </div>
+        }
+    </div>
+
+    <div class="tab-content" #tabContent></div>
+</div>

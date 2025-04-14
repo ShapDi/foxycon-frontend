@@ -12,7 +12,7 @@
     border-radius: 5px;
     border: none;
     padding: 5px;
-    width: 235px;
+    width: 225px;
     height: 20px;
 }
 
@@ -46,6 +46,7 @@
     border-bottom-right-radius: 5px;
     text-align: center;
     max-width: 245px;
+
     :hover {
         background-color: var(--orange-color);
         border-radius: 5px;
@@ -54,10 +55,12 @@
 
 .inputs {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 5px;
     margin-right: 10px;
-    width: 100%; 
-    box-sizing: border-box; 
+    width: 100%;
+    box-sizing: border-box;
 }
 
 input {
@@ -68,19 +71,31 @@ input {
     font-size: 18px;
     font-family: 'Jura';
     color: white;
-    width: 100%; 
-    max-width: 100%; 
+    width: 100%;
+    max-width: 100%;
     padding: 2px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
+}
+
+input[type="date"] {
+    min-width: 0;
+    width: 100%;
+    flex: 1 1 0;
 }
 
 input[type="number"] {
     -webkit-appearance: none;
     -moz-appearance: textfield;
     appearance: none;
+    min-width: 0;
+    width: 100%;
+    flex: 1 1 0;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
+    min-width: 0;
+    width: 100%;
+    flex: 1 1 0;
 }

@@ -19,3 +19,8 @@ export enum FilterMap{
     VideoSearch = 'video_search',
     ChannelSearch = 'channel_search'
 }
+
+export enum Card{
+    Video = 'video',
+    Channel = 'channel'
+}

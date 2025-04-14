@@ -1,14 +1,15 @@
-<div class="filters-wrapper m10">
+<form class="filters-wrapper m10" [formGroup]="form" (ngSubmit)="onSubmit()">
     <label>{{ label }}</label>
 
     <div class="filters">
-        @for (filter of getFilters() | keyvalue; track $index) {
-            <app-filter
-            [label]="filter.key"
-            [options]="filter.value"
-            ></app-filter>
+        @for (key of form.controls | keyvalue; track $index) {
+        <app-filter 
+            [label]="key.key" 
+            [options]="getFilters()[key.key]"
+            [formControl]="getFormControl(key.key)"
+        ></app-filter>
         }
     </div>
 
     <button class="button">Применить</button>
-</div>
+</form>

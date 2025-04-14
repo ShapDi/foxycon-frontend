@@ -43,3 +43,8 @@ body {
 .no-select{
     user-select: none;
 }
+
+hr{
+    border: 1px solid var(--orange-color);
+    margin: 15px 5px;
+}

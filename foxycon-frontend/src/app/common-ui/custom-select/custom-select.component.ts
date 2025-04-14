@@ -52,30 +52,40 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
   select(key: string): void {
     if (this.isDisabled)
       return;
-
+  
     this.selectedKey = key;
     this.isOpen = false;
-
+  
     const fields = this.options[key]?.fields;
     if (fields) {
       this.fieldValues = {};
       for (const field of fields) {
         this.fieldValues[field.name] = '';
       }
-    }
-    else {
+    } else {
       this.fieldValues = {};
-      this.onChange(null);
     }
+  
+    const value = {
+      selectedKey: this.selectedKey,
+      fieldValues: this.fieldValues
+    };
+  
+    this.onChange(value);
+    this.valueChange.emit(value);
   }
 
   emitFieldValues() {
-    this.onChange(this.fieldValues);
-    this.valueChange.emit(this.fieldValues);
+    const value = {
+      selectedKey: this.selectedKey,
+      fieldValues: this.fieldValues
+    };
+  
+    this.onChange(value);
+    this.valueChange.emit(value);
   }
 
   writeValue(value: any): void {
-
     if (value) {
       this.selectedKey = value.selectedKey;
       this.fieldValues = value.fieldValues;

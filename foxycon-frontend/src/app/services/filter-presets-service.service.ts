@@ -9,22 +9,26 @@ import { FilterPreset } from '../utils/enums';
 export class FilterPresetsService {
   private builder = new FilterOptionsBuilder()
 
-  private presets: Record<FilterPreset, FilterType> = {
-    [FilterPreset.AllOrRange]: this.builder.start('all', 'любым количеством').withoutFields()
-      .start('range', 'диапозоном').withClamp()
-      .build(),
-    [FilterPreset.AllOrRangeDate]: this.builder.start('all', 'любым временем').withoutFields()
-      .start('range_date', 'диапозоном времени').withDateRange()
-      .build(),
-    [FilterPreset.AllOrSingleString]: this.builder.start('all', 'любым').withoutFields()
-      .start('single_string', 'конкретным').withSingleValue()
-      .build(),
-    [FilterPreset.AllOrSingleNumber]: this.builder.start('all', 'любым').withoutFields()
-      .start('single_number', 'конкретным').withSingleValue('value', 'number', 'Enter value')
-      .build()
+  private presets: Record<FilterPreset, (key: string) => FilterType> = {
+    [FilterPreset.AllOrRange]: (key) =>
+      this.builder.start('all', 'любым').withoutFields()
+        .start(key, 'диапозоном').withClamp()
+        .build(),
+    [FilterPreset.AllOrRangeDate]: (key) =>
+      this.builder.start('all', 'любым').withoutFields()
+        .start(key, 'диапозоном').withDateRange()
+        .build(),
+    [FilterPreset.AllOrSingleString]: (key) =>
+      this.builder.start('all', 'любым').withoutFields()
+        .start(key, 'конкретным').withSingleValue()
+        .build(),
+    [FilterPreset.AllOrSingleNumber]: (key) =>
+      this.builder.start('all', 'любым').withoutFields()
+        .start(key, 'конкретным').withSingleValue(key, 'number', 'Значение')
+        .build()
   };
 
-  getPreset(name: FilterPreset): FilterType {
-    return this.presets[name];
+  getPreset(presetName: FilterPreset, key: string): FilterType {
+    return this.presets[presetName](key);
   }
 }

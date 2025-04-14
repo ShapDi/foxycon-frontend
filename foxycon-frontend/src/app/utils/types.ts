@@ -1,3 +1,5 @@
+import { ChannelCardData, VideoCardData } from "../interfaces/cards-interfaces";
+
 export type FieldConfig = {
   name: string;
   type: 'text' | 'number' | 'date';
@@ -10,3 +12,5 @@ export type OptionConfig = {
 }
 
 export type FilterPreset = Record<string, OptionConfig>
+
+export type CardData = VideoCardData | ChannelCardData;

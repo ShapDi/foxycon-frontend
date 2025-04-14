@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Video, VideoResponse, YoutubeChannel, YouTubeVideo } from './youtubeapi.interfece';
+import { VideoResponse, YoutubeChannel, YouTubeVideo } from './youtubeapi.interfece';
 import { ConfigService } from './config.service';
 import { Operation, SocialMedia } from '../utils/enums';
 

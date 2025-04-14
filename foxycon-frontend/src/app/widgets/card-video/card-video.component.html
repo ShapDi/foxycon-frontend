@@ -1,27 +1,14 @@
-<div class="conteiner-card">
-    <div conteiner-info>
-        <p>Название</p>
-        {{data_cart.title}}
-    </div>
-    <div conteiner-info >
-        <p>Просмотры</p>
-        {{data_cart.views}}
-        <p>Количество лайков</p>
-        {{data_cart.likes}}
-    </div>
-    <!-- <div conteiner-info>
+<div class="player">
+    <youtube-player [videoId]="data.video.id" [width]="380" [height]="205" [playerVars]="playerOptions"></youtube-player>
+</div>
 
-    </div> -->
+<a class="link" target="_blank" href="{{data.video.link}}">{{data.video.title}}</a>
 
-    <div conteiner-info>
-        <p>Дата релиза</p>
-        {{data_cart.release_date}}
-        <p>Дата добавления в систему</p>
-        {{data_cart.add_data}}
+<div class="stats">
+    @for (stat of getExposedStats() | keyvalue: originalOrder; track $index;) {
+    <div class="stat">
+        <img class="icon" [src]="'/assets/svg/' + stat.key + '.svg'">
+        {{stat.value}}
     </div>
-
-    <div conteiner-info>
-
-    </div>
-    <div conteiner-info><a target="_blank" href={{data_cart.link}}>Передти на видео</a></div>
+    }
 </div>

@@ -10,21 +10,22 @@ export class FilterOptionsBuilder {
         return this;
     }
 
-    withClamp(minPlaceholder = 'Min', maxPlaceholder = 'Max'): this {
+    withClamp(minPlaceholder = 'от', maxPlaceholder = 'до'): this {
         return this.withFields([
-            { name: 'min', type: 'number', placeholder: minPlaceholder },
-            { name: 'max', type: 'number', placeholder: maxPlaceholder },
+            { name: `${this.currentKey}_min`, type: 'number', placeholder: minPlaceholder },
+            { name: `${this.currentKey}_max`, type: 'number', placeholder: maxPlaceholder },
         ]);
     }
 
-    withDateRange(fromPlaceholder = 'From', toPlaceholder = 'To'): this {
+    withDateRange(fromPlaceholder = 'с', toPlaceholder = 'по'): this {
         return this.withFields([
-            { name: 'from', type: 'date', placeholder: fromPlaceholder },
-            { name: 'to', type: 'date', placeholder: toPlaceholder },
+            { name: `${this.currentKey}_min`, type: 'date', placeholder: fromPlaceholder },
+            { name: `${this.currentKey}_max`, type: 'date', placeholder: toPlaceholder },
         ]);
     }
 
-    withSingleValue(name = 'value', type: 'text' | 'number' | 'date' = 'text', placeholder = 'Enter value'): this {
+    withSingleValue(name = 'value', type: 'text' | 'number' | 'date' = 'text', placeholder = 'Значение'): this {
+        name = this.currentKey!;
         return this.withFields([
             { name, type, placeholder },
         ]);

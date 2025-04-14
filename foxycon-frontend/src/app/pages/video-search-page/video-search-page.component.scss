@@ -1,0 +1,34 @@
+.search{
+    position: absolute;
+    top: 114px;
+    left: calc(100% - 110px - 35%);
+    width: calc(35%);
+    height: 40px;
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: var(--orange-color);
+    box-sizing: border-box;
+    display: flex;
+}
+
+.search-field{
+    font-family: 'Jura';
+    font-size: 18px;
+    padding: 5px;
+    color: white;
+    outline: none;
+    background-color: var(--background-color);
+    border: none;
+    border-radius: 5px;
+    width: 90%;
+}
+
+.search-button{
+    background-color: var(--orange-color);
+    border: none;
+    width: 10%;
+}
+
+.search-icon{
+    filter: invert(1);
+}

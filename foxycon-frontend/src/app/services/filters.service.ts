@@ -11,17 +11,18 @@ export class FiltersService {
 
   private filters_map: Record<string, Record<string, FilterType>> = {
     [FilterMap.VideoSearch]: {
-      'просмотров': this.presets.getPreset(FilterPreset.AllOrRange),
-      'лайков': this.presets.getPreset(FilterPreset.AllOrRange),
-      'загрузки на ютуб': this.presets.getPreset(FilterPreset.AllOrRangeDate),
-      'добавления в базу': this.presets.getPreset(FilterPreset.AllOrRangeDate),
+      'просмотров': this.presets.getPreset(FilterPreset.AllOrRange, 'number_views'),
+      'лайков': this.presets.getPreset(FilterPreset.AllOrRange, 'number_likes'),
+      'загрузки на ютуб': this.presets.getPreset(FilterPreset.AllOrRangeDate, 'release_date'),
+      'добавления в базу': this.presets.getPreset(FilterPreset.AllOrRangeDate, 'add_data'),
+      'гео': this.presets.getPreset(FilterPreset.AllOrSingleString, 'location'),
     },
     [FilterMap.ChannelSearch]: {
-      'просмотров': this.presets.getPreset(FilterPreset.AllOrRange),
-      'подписчиков': this.presets.getPreset(FilterPreset.AllOrRange),
-      'видео': this.presets.getPreset(FilterPreset.AllOrRange),
-      'регистрации на ютуб': this.presets.getPreset(FilterPreset.AllOrRangeDate),
-      'добавления в базу': this.presets.getPreset(FilterPreset.AllOrRangeDate),
+      'просмотров': this.presets.getPreset(FilterPreset.AllOrRange, 'number_views'),
+      'подписчиков': this.presets.getPreset(FilterPreset.AllOrRange, 'number_subscribers'),
+      'видео': this.presets.getPreset(FilterPreset.AllOrRange, 'number_video'),
+      'регистрации на ютуб': this.presets.getPreset(FilterPreset.AllOrRangeDate, 'created_at'),
+      'добавления в базу': this.presets.getPreset(FilterPreset.AllOrRangeDate, 'add_data'),
     }
   };
 

@@ -1,5 +1,8 @@
 <div class="filter-wrapper">
     <app-custom-select
-    [options]="options"></app-custom-select>
+    [options]="options"
+    [(ngModel)]="value"
+    (ngModelChange)="setValue($event)"
+    ></app-custom-select>
     <label>{{ label }}</label>
 </div>

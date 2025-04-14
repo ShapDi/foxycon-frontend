@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { HeaderRoutersComponent } from '../../widgets/header-routers/header-routers.component';
-import { FormVideoSearchComponent } from '../../widgets/form-video-search/form-video-search.component';
 import { FiltersComponent } from "../../widgets/filters/filters.component";
 import { FilterMap } from '../../utils/enums';
-import { CommonModule } from '@angular/common';
+import { TabsComponent } from "../../widgets/tabs/tabs.component";
 
 @Component({
   selector: 'app-video-search-page',
-  imports: [FiltersComponent],
+  imports: [TabsComponent],
   templateUrl: './video-search-page.component.html',
-  styleUrl: './video-search-page.component.css'
+  styleUrl: './video-search-page.component.scss'
 })
 export class VideoSearchPageComponent {
   map = FilterMap;
