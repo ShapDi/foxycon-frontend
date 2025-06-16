@@ -1,32 +1,29 @@
 <div class="custom-select no-select">
-    <div class="selected" (click)="toggleDropdown()" [class.up]="isOpen">
-        @if (options[selectedKey].fields === undefined) {
-            <div class="selected-option">{{ options[selectedKey].label }}</div>
-        } @else {
-            <div class="inputs">
-                @if (options[selectedKey].fields) {
-                    @for (field of options[selectedKey].fields; track $index) {
-                        <input
-                        [type]="field.type"
-                        [placeholder]="field.placeholder"
-                        [(ngModel)]="fieldValues[field.name]"
-                        (ngModelChange)="emitFieldValues()"
-                        (click)="preventDropdown($event)"
-                        >
-                    }
-                }
-            </div>
+  <div class="selected" (click)="toggleDropdown()" [class.up]="isOpen">
+    @if (options[selectedKey].fields === undefined) {
+      <div class="selected-option">{{ options[selectedKey].label }}</div>
+    } @else {
+      <div class="inputs" [formGroup]="fieldGroup"> 
+        @for (field of options[selectedKey].fields; track $index) {
+          <input
+            [formControlName]="field.name"            
+            [type]="field.type"
+            [placeholder]="field.placeholder"
+            (click)="preventDropdown($event)"
+          >
         }
-        <span class="arrow" [class.up]="isOpen">&#9662;</span>
-    </div>
+      </div>
+    }
+    <span class="arrow" [class.up]="isOpen">&#9662;</span>
+  </div>
 
-    <ul class="options">
-        @if (isOpen) {
-        @for (key of filteredKeys; track $index) {
+  <ul class="options">
+    @if (isOpen) {
+      @for (key of filteredKeys; track $index) {
         <li (click)="select(key)">
-            {{options[key].label}}
+          {{ options[key].label }}
         </li>
-        }
-        }
-    </ul>
+      }
+    }
+  </ul>
 </div>

@@ -7,29 +7,27 @@ import { CookieService } from 'ngx-cookie-service';
 import { ConfigService } from './config.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserManagementService {
-  http = inject(HttpClient)
-  config = inject(ConfigService)
-  
-  baseApiUrl= `${this.config.apiUrl}/user_management`
+  http = inject(HttpClient);
+  config = inject(ConfigService);
 
-  cookerServece = inject(CookieService)
-  token:string | null = null 
+  baseApiUrl = `${this.config.apiUrl}/user_management`;
+
+  cookieService = inject(CookieService);
+  token: string | null = null;
 
   get isAuth() {
     if (!this.token) {
-      this.token = this.cookerServece.get('token')
+      this.token = this.cookieService.get('token');
     }
-    return !!this.token
-
+    return !!this.token;
   }
 
-  login(payload: {username:string, password:string}){
-
-    const fd = new FormData()
-    console.log(payload.username)
+  login(payload: { username: string; password: string }) {
+    const fd = new FormData();
+    console.log(payload.username);
 
     const body = new URLSearchParams();
     body.set('grant_type', 'password');
@@ -39,28 +37,29 @@ export class UserManagementService {
     body.set('client_id', 'string');
     body.set('client_secret', 'string');
     const headers = new HttpHeaders({
-      'accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded'
+      accept: 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
     });
-    return this.http.post<TokenResponse>(`${this.baseApiUrl}/token`, body,{ headers: headers }
+    return this.http
+      .post<TokenResponse>(`${this.baseApiUrl}/token`, body, {
+        headers: headers,
+      })
+      .pipe(
+        tap((val) => {
+          this.token = val.access_token;
 
-    ).pipe(tap(val => {
-      this.token = val.access_token
-      
-      this.cookerServece.set('token', this.token)
-
-    }))
-
+          this.cookieService.set('token', this.token);
+        })
+      );
   }
-
 }
 
 export const canActivateAuth = () => {
-  const isLoggedIn = inject(UserManagementService).isAuth
+  const isLoggedIn = inject(UserManagementService).isAuth;
 
   if (isLoggedIn) {
-    return true
+    return true;
   }
 
-  return inject(Router).createUrlTree(['/auth'])
-}
+  return inject(Router).createUrlTree(['/auth']);
+};

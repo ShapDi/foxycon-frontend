@@ -2,11 +2,13 @@
     <label>{{ label }}</label>
 
     <div class="filters">
-        @for (key of form.controls | keyvalue; track $index) {
+        @for (filter of getFilters() | keyvalue; track $index) {
         <app-filter 
-            [label]="key.key" 
-            [options]="getFilters()[key.key]"
-            [formControl]="getFormControl(key.key)"
+            [filterKey]="filter.key"
+            [label]="filter.key"
+            [options]="filter.value"
+            [formGroup]="form"
+            (valueChange)="onFilterValueChange(filter.key, $event)"
         ></app-filter>
         }
     </div>

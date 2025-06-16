@@ -1,48 +1,69 @@
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Optional, Output, Self } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NgControl } from '@angular/forms';
-import { OptionConfig } from '../../utils/types';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CustomSelectValue, OptionConfig } from '../../utils/types';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-custom-select',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './custom-select.component.html',
-  styleUrl: './custom-select.component.scss'
+  styleUrl: './custom-select.component.scss',
 })
-export class CustomSelectComponent implements OnInit, ControlValueAccessor {
+export class CustomSelectComponent implements OnInit, OnChanges, OnDestroy {
   @Input() options: Record<string, OptionConfig> = {};
-  @Input() initialKey: string = '';
-  @Output() valueChange = new EventEmitter<any>();
+  @Input() control!: FormControl;
+  @Output() valueChange = new EventEmitter<CustomSelectValue>();
 
   selectedKey: string = '';
+  fieldGroup = new FormGroup({});
   isOpen = false;
-  isDisabled = false;
-  fieldValues: Record<string, any> = {};
 
-  private onChange = (_: any) => { };
-  private onTouched = () => { };
+  private fieldGroupSub?: Subscription;
 
-  constructor(private elementRef: ElementRef, @Optional() @Self() public ngControl: NgControl) {
-    if (this.ngControl != null) {
-      this.ngControl.valueAccessor = this;
-    }
-  }
-
-  ngOnInit(): void {
-    const keys = Object.keys(this.options);
-    if (keys.length > 0)
-      this.selectedKey = this.options[this.initialKey] ? this.initialKey : keys[0];
+  get selectedOption(): OptionConfig | undefined {
+    return this.options[this.selectedKey];
   }
 
   get filteredKeys(): string[] {
-    return Object.keys(this.options).filter(k => k !== this.selectedKey);
+    return Object.keys(this.options).filter((k) => k !== this.selectedKey);
+  }
+
+  constructor(private elementRef: ElementRef) {}
+
+  ngOnInit(): void {
+    this.selectedKey = this.control.value?.selectedKey || this.getDefaultKey();
+    this.setupFieldGroup();
+    this.emitCombinedValue();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options'] && this.control) {
+      this.selectedKey =
+        this.control.value?.selectedKey || this.getDefaultKey();
+      this.setupFieldGroup();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.fieldGroupSub?.unsubscribe();
   }
 
   toggleDropdown(): void {
-    if (!this.isDisabled) {
-      this.isOpen = !this.isOpen;
-    }
+    this.isOpen = !this.isOpen;
   }
 
   preventDropdown(event: MouseEvent) {
@@ -50,65 +71,50 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
   }
 
   select(key: string): void {
-    if (this.isDisabled)
-      return;
-  
     this.selectedKey = key;
     this.isOpen = false;
-  
-    const fields = this.options[key]?.fields;
-    if (fields) {
-      this.fieldValues = {};
-      for (const field of fields) {
-        this.fieldValues[field.name] = '';
+    this.setupFieldGroup();
+    this.emitCombinedValue();
+  }
+
+  setupFieldGroup(): void {
+    this.fieldGroupSub?.unsubscribe();
+    const group: Record<string, FormControl> = {};
+    const fields = this.selectedOption?.fields ?? [];
+
+    for (const field of fields) {
+      const initial = this.control.value?.fieldValues?.[field.name] ?? '';
+      group[field.name] = new FormControl(initial);
+    }
+
+    this.fieldGroup = new FormGroup(group);
+
+    this.fieldGroupSub = this.fieldGroup.valueChanges.subscribe(
+      (newFieldValues) => {
+        this.emitCombinedValue(newFieldValues);
       }
-    } else {
-      this.fieldValues = {};
-    }
-  
+    );
+  }
+
+  emitCombinedValue(newFieldValues: any | null = null): void {
     const value = {
       selectedKey: this.selectedKey,
-      fieldValues: this.fieldValues
+      fieldValues: newFieldValues ?? this.fieldGroup.value,
     };
-  
-    this.onChange(value);
+
+    this.control.setValue(value);
     this.valueChange.emit(value);
   }
 
-  emitFieldValues() {
-    const value = {
-      selectedKey: this.selectedKey,
-      fieldValues: this.fieldValues
-    };
-  
-    this.onChange(value);
-    this.valueChange.emit(value);
-  }
-
-  writeValue(value: any): void {
-    if (value) {
-      this.selectedKey = value.selectedKey;
-      this.fieldValues = value.fieldValues;
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+  private getDefaultKey(): string {
+    const keys = Object.keys(this.options);
+    return keys.length > 0 ? keys[0] : '';
   }
 
   @HostListener('document:click', ['$event'])
   handleOutsideClick(event: MouseEvent) {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.isOpen = false;
-      this.onTouched();
     }
   }
 }

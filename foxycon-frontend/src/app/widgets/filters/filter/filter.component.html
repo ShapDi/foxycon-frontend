@@ -1,8 +1,8 @@
 <div class="filter-wrapper">
     <app-custom-select
     [options]="options"
-    [(ngModel)]="value"
-    (ngModelChange)="setValue($event)"
+    [control]="getControl(filterKey)"
+    (valueChange)="onFilterValueChange(filterKey, $event)"
     ></app-custom-select>
     <label>{{ label }}</label>
 </div>

@@ -9,14 +9,27 @@ import { InspectionChannelPageComponent } from './pages/inspection-channel-page/
 import { LayoutComponent } from './common-ui/layout/layout.component';
 
 export const routes: Routes = [
-    {
-        path: '', component: LayoutComponent, children: [
-            { path: '', component: MainComponent, canActivate: [canActivateAuth] },
-            { path: 'channel_search', component: ChannelSearchPageComponent, canActivate: [canActivateAuth] },
-            { path: 'video_search', component: VideoSearchPageComponent, canActivate: [canActivateAuth] },
-            { path: 'channel_inspection', component: InspectionChannelPageComponent, canActivate: [canActivateAuth] },
-            { path: 'youtube', redirectTo: 'video_search', pathMatch: 'full'}
-        ]
-    },
-    { path: 'auth', component: AuthPageComponent },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: '', component: MainComponent, canActivate: [canActivateAuth] },
+      {
+        path: 'channel_search',
+        component: ChannelSearchPageComponent,
+        canActivate: [canActivateAuth],
+      },
+      {
+        path: 'video_search',
+        component: VideoSearchPageComponent /*canActivate: [canActivateAuth]*/,
+      },
+      {
+        path: 'channel_inspection',
+        component: InspectionChannelPageComponent,
+        canActivate: [canActivateAuth],
+      },
+      { path: 'youtube', redirectTo: 'video_search', pathMatch: 'full' },
+    ],
+  },
+  { path: 'auth', component: AuthPageComponent },
 ];

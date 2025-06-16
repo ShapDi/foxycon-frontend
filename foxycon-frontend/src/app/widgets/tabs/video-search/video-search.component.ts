@@ -1,24 +1,34 @@
 import { Component, inject } from '@angular/core';
-import { FiltersComponent } from "../../filters/filters.component";
+import { FiltersComponent } from '../../filters/filters.component';
 import { Card, FilterMap } from '../../../utils/enums';
-import { CardsContainerComponent } from "../../cards-container/cards-container.component";
+import { CardsContainerComponent } from '../../cards-container/cards-container.component';
 import { CardData } from '../../../utils/types';
 import { YouTubeVideo } from '../../../services/youtubeapi.interfece';
 import { YoutubeApiService } from '../../../services/youtube-api.service';
+import { YouTubeVideoFilter } from '../../../interfaces/db-requests-interfaces';
+import { PaginationComponent } from '../../pagination/pagination.component';
 
 @Component({
   selector: 'app-video-search',
-  imports: [FiltersComponent, CardsContainerComponent],
+  imports: [FiltersComponent, CardsContainerComponent, PaginationComponent],
   templateUrl: './video-search.component.html',
-  styleUrl: './video-search.component.scss'
+  styleUrl: './video-search.component.scss',
 })
 export class VideoSearchComponent {
   filter_map = FilterMap;
   youtubeApi: YoutubeApiService = inject(YoutubeApiService);
 
-  // getCards(): YouTubeVideo[] {
-  //   return this.youtubeApi.getYoutubeVideo()
-  // }
+  page: number = 8;
+  items: number = 50;
+
+  getVideos(filters: Partial<YouTubeVideoFilter>) {
+    let videos: YouTubeVideo[];
+    this.youtubeApi.getYoutubeVideo(filters, 0, 10).subscribe((val) => {
+      videos = val.content;
+
+      videos.forEach((v) => console.log(v));
+    });
+  }
 
   video: YouTubeVideo = {
     id: 'tktK64VubiM',
@@ -34,8 +44,8 @@ export class VideoSearchComponent {
     updating_data: null,
     add_data: '31-03-2019',
     type_contents: [],
-    type_formats: []
-  }
+    type_formats: [],
+  };
   video2: YouTubeVideo = {
     id: 'tktK64VubiM',
     title: "Kingdom Hearts - 'Roxas's Theme' | ORIGINAL LYRICS | Lizz Robinett",
@@ -50,52 +60,52 @@ export class VideoSearchComponent {
     updating_data: null,
     add_data: '31-03-2019',
     type_contents: [],
-    type_formats: []
-  }
+    type_formats: [],
+  };
   cards: CardData[] = [
     {
       type: Card.Video,
-      video: this.video
+      video: this.video,
     },
     {
       type: Card.Video,
-      video: this.video2
+      video: this.video2,
     },
     {
       type: Card.Video,
-      video: this.video2
+      video: this.video2,
     },
     {
       type: Card.Video,
-      video: this.video2
+      video: this.video2,
     },
     {
       type: Card.Video,
-      video: this.video2
+      video: this.video2,
     },
     {
       type: Card.Video,
-      video: this.video2
+      video: this.video2,
     },
     {
       type: Card.Video,
-      video: this.video2
+      video: this.video2,
     },
     {
       type: Card.Video,
-      video: this.video2
+      video: this.video2,
     },
     {
       type: Card.Video,
-      video: this.video2
+      video: this.video2,
     },
     {
       type: Card.Video,
-      video: this.video2
+      video: this.video2,
     },
     {
       type: Card.Video,
-      video: this.video2
-    }
+      video: this.video2,
+    },
   ];
 }

@@ -16,7 +16,7 @@ export interface YouTubeVideo {
   likes: number;
   updating_data: string | null;
   add_data: string;
-  type_contents: any[]; 
+  type_contents: any[];
   type_formats: TypeFormat[];
 }
 
@@ -36,9 +36,9 @@ export interface YoutubeChannel {
   name_channel: string;
   updating_data: string | null;
   number_subscribers: number;
-  created_at: string; 
+  created_at: string;
   link_channel: string;
-  add_data: string; 
+  add_data: string;
   total_views: number;
   number_video: number;
   country_system_youtube: CountrySystemYoutube[];

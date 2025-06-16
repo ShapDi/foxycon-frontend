@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <app-pagination-card 
+    [label]="'‹'" 
+    [disabled]="currentPage === 1"
+    (click)="prevPage()">
+  </app-pagination-card>
+
+  @for (page of pages; track $index) {
+    @if (page === 'dots') {
+      <app-pagination-card [label]="'...'" [disabled]="true"></app-pagination-card>
+    } @else {
+      @if (isNumber(page)) {
+        <app-pagination-card
+          [index]="page"
+          [active]="isActive(page)"
+          (click)="selectPage(page)">
+        </app-pagination-card>
+      }
+    }
+  }
+
+  <app-pagination-card 
+    [label]="'›'" 
+    [disabled]="currentPage === totalPages"
+    (click)="nextPage()">
+  </app-pagination-card>
+</div>
