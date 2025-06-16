@@ -11,8 +11,8 @@ export class ConfigService {
 
   private config: ConfigResponse = {
     "API_KEY": "B00XgwofN.Aw",
-    "API_URL": "https://foxyconsystem.ru"
-        // "API_URL": "http://127.0.0.1:2222"
+    // "API_URL": "https://foxyconsystem.ru"
+        "API_URL": "http://127.0.0.1:2222"
   };
 
   // ngOnInit(){

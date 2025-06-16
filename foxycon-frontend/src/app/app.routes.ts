@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainComponent } from './pages/main/main.component';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
-import { canActivateAuth } from './services/user-management.service';
+import { canActivateAuth } from './services/auth.service';
 import { ChannelSearchPageComponent } from './pages/channel-search-page/channel-search-page.component';
 import { VideoSearchPageComponent } from './pages/video-search-page/video-search-page.component';
 import { InspectionVideoPageComponent } from './pages/inspection-video-page/inspection-video-page.component';

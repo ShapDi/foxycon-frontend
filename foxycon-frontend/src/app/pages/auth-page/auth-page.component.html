@@ -1,8 +1,9 @@
-    <div class="container">
-
-        <div class="main_form">
-            
-
+    <!-- <div class="container">
+        <div>
+            <app-google-auth-widget></app-google-auth-widget>
+        </div>
+             -->
+<!-- 
             <form [formGroup]="form" (ngSubmit)="onSubmit()"> 
                 <div class="container-form">
                     <div><h2>Авторизация</h2></div>
@@ -11,12 +12,51 @@
                     <div><button type="submit">Войти</button></div>
                 </div>
 
-            </form>
+            </form> -->
+<!-- 
+        </div> -->
 
-        </div>
-
-        </div>
-
-
+    <!-- </div> -->
 
 
+
+
+<!-- <div
+    tuiAppearance="floating"
+    tuiCardLarge
+    tuiHeader
+    class="image"
+>
+    <h1 tuiTitle>
+        Авторизация
+    </h1>
+ 
+    <aside tuiAccessories>
+        <button>
+
+        </button>
+    </aside>
+</div> -->
+
+	<div tuiPlatform="web" class="main-element">
+
+ 
+    <div
+        tuiAppearance="floating"
+        tuiCardLarge
+    >
+        <header tuiHeader>
+            <h1 tuiTitle>
+                Авторизация 
+                <span tuiSubtitle>Доступ только для корпоративных google аккаунтов</span>
+            </h1>
+ 
+
+        </header>
+ 
+        <footer>
+                <app-google-auth-widget></app-google-auth-widget>
+        </footer>
+    </div>
+</div>
+ 
