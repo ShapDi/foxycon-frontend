@@ -1,44 +1,220 @@
-<div id="header"></div>
-<h2>Фильтр поиска YouTube-каналов</h2>
 
-<form id="filterForm" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="conteiner-form">
-        <div class="conteiner-1">
-            <div>Название канала</div>
-            <label><input formControlName="name_channel" type="text" name="name_channel"></label>
-            <div>Ссылка на канал</div>
-            <label><input formControlName="link_channel" type="text" name="link_channel"></label>
-            <div>Мин. просмотров</div>
-            <label><input formControlName="number_views_min" type="number" name="number_views_min"></label>
+<!-- 
+<app-pagination-widget [page_num_con]="page" (incrementCountEvent)="logValue($event)"></app-pagination-widget>
+<app-card-channel *ngFor="let data_cart of profiles"  [data_cart]="data_cart"> </app-card-channel>   
+-->
+
+
+
+<!-- <app-pagination-widget [page_num_con]="page" (incrementCountEvent)="logValue($event)"></app-pagination-widget>
+<app-card-channel *ngFor="let data_cart of profiles" [data_cart]="data_cart"></app-card-channel> -->
+
+
+<header tuiHeader>
+    <h3 tuiTitle>
+        Поиск YouTube каналов
+        <span tuiSubtitle>Заполните параметры для поиска</span>
+    </h3>
+</header>
+<br>
+
+<form
+    tuiForm="l"
+    [formGroup]="form"
+    [style.max-width.rem]="60"
+    (ngSubmit)="onSubmit()"
+>
+<fieldset>
+        <tui-textfield>
+                    <label tuiLabel>Название 
+                        канала</label>
+                    <input
+                        formControlName="name_channel"
+                        placeholder="Например: Мой канал"
+                        tuiTextfield
+                    />
+                    <tui-icon icon="tuiIconSearch" [tuiTooltip]="'Введите часть названия канала для поиска'"></tui-icon>
+        </tui-textfield>
+      
+        <tui-textfield
+                    tuiChevron
+                    [tuiTextfieldCleaner]="false"
+                >
+                    <label tuiLabel>Страна</label>
+    
+                    <input
+                        formControlName="country_sys"
+                        tuiSelect
+                    />
+    
+                    <tui-data-list-wrapper
+                        *tuiTextfieldDropdown
+                        new
+                        [items]="country"
+                    />
+        </tui-textfield>
+</fieldset>
+
+<fieldset>
+        <!-- <div class="big_text">
+            Канал с
+        </div> -->
+</fieldset>
+<fieldset>
+    <div class="stack">
+
+                <tui-input-slider
+                    formControlName="number_subscribers_min"
+                    [max]="40000000"
+                    [min]="0"
+                    [segments]="3000">   
+                    От
+                </tui-input-slider>
+                <!-- <div class="ticks-labels">
+                    <span>от 0 </span>
+                    <span>до 40 000 000</span>
+                </div>   -->
+                <br>
+
+                <tui-input-date formControlName="created_at_min">
+                    От
+                    <input
+                        placeholder="Выберите дату"
+                        tuiTextfieldLegacy
+                    />
+                </tui-input-date>
+                <tui-error
+                    formControlName="created_at_min"
+                    [error]="[] | tuiFieldError | async"
+                />
+
+                
+    </div>
+        
+    <div class="stack">
+
+                <tui-input-slider
+                    formControlName="number_subscribers_max"
+                    [max]="40000000"
+                    [min]="0"
+                    [segments]="1">   
+                    До
+                </tui-input-slider>
+                <!-- <div class="ticks-labels">
+                    <span>от 0 </span>
+                    <span>до 40 000 000</span>
+                </div> -->
+                <br>
+                <tui-input-date formControlName="created_at_max">
+                    До
+                    <input
+                        placeholder="Выберите дату"
+                        tuiTextfieldLegacy
+                    />
+                </tui-input-date>
+                <tui-error
+                    formControlName="created_at_max"
+                    [error]="[] | tuiFieldError | async"
+                />
+    </div>
+    <div class="stack">
+            <div class="big_text">
+                Количество подписчиков
+            </div>
+            <br>
+           
+            <div class="big_text">
+                Дата создания канала
+            </div>
+    </div>
+
+
+    <div class="stack">
+                <tui-input-slider
+                    formControlName="number_video_min"
+                    [max]="40000000"
+                    [min]="0"
+                    [segments]="1">   
+                    От
+                </tui-input-slider>
+                <!-- <div class="ticks-labels">
+                    <span>от 0 </span>
+                    <span>до 40 000000</span>
+                </div> -->
+                <br>
+
+            <tui-input-date formControlName="created_at_min">
+                    От
+                    <input
+                        placeholder="Выберите дату"
+                        tuiTextfieldLegacy
+                    />
+                </tui-input-date>
+                <tui-error
+                    formControlName="created_at_min"
+                    [error]="[] | tuiFieldError | async"
+                />
+
+    </div>
+    <div class="stack">
+                <tui-input-slider
+                    formControlName="number_video_max"
+                    [max]="40000000"
+                    [min]="0"
+                    [segments]="1">   
+                    До
+                </tui-input-slider>
+                <!-- <div class="ticks-labels">
+                    <span>от 0 </span>
+                    <span>до 40 000000</span>
+                </div>
+             -->
+                <br>
+            <tui-input-date formControlName="created_at_max">
+                    До
+                    <input
+                        placeholder="Выберите дату"
+                        tuiTextfieldLegacy
+                    />
+            </tui-input-date>
+                <tui-error
+                    formControlName="created_at_max"
+                    [error]="[] | tuiFieldError | async"
+                />
+    </div>
+    <div class="stack">
+        <div class="big_text">
+            Количество просмотров
         </div>
-        <div class="conteiner-1">
-            <div>Макс. просмотров</div>
-            <label><input formControlName="number_views_max" type="number" name="number_views_max"></label>
-            <div>Мин. дата добавления</div>
-            <label><input formControlName="add_data_min" type="date" name="add_data_min"></label>
-            <div>Макс. дата добавления</div>
-            <label><input formControlName="add_data_max" type="date" name="add_data_max"></label>
-        </div>
-        <div class="conteiner-1">
-            <div>Мин. подписчиков</div>
-            <label><input formControlName="number_subscribers_min" type="number" name="number_subscribers_min"></label>
-            <div>Макс. подписчиков</div>
-            <label><input formControlName="number_subscribers_max" type="number" name="number_subscribers_max"></label>
-            <div>Мин. видео</div>
-            <label><input formControlName="number_video_min" type="number" name="number_video_min"></label>
-        </div>
-        <div class="conteiner-1">
-            <div>Макс. видео</div>
-            <label><input formControlName="number_video_max" type="number" name="number_video_max"></label>
-            <div>Мин. дата создания</div>
-            <label><input formControlName="created_at_min" type="date" name="created_at_min"></label>
-            <div>Макс. дата создания</div>
-            <label><input formControlName="created_at_max" type="date" name="created_at_max"></label>
+        <br>
+        <div class="big_text">
+            Дата добавления
         </div>
     </div>
-    <button type="submit" >🔍 Отправить запрос</button>
+
+    
+</fieldset>
+<br>
+    <div class="stack">
+        <button
+            tuiButton
+            type="submit"
+        >
+            <tui-icon icon="tuiIconSearch" class="tui-icon_left"></tui-icon>
+            Найти каналы
+        </button>
+        <button
+            appearance="flat"
+            tuiButton
+            type="reset"
+            (click)="form.reset()"
+        >
+            Очистить
+        </button>
+    </div>
+
+
 </form>
 
-
 <app-pagination-widget [page_num_con]="page" (incrementCountEvent)="logValue($event)"></app-pagination-widget>
-<app-card-channel *ngFor="let data_cart of profiles"  [data_cart]="data_cart"> </app-card-channel> 
+<app-card-channel *ngFor="let data_cart of profiles" [data_cart]="data_cart"></app-card-channel>

@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { Video, VideoResponse, YoutubeChannel, YouTubeVideo } from './youtubeapi.interfece';
 import { ConfigService } from './config.service';
 import { Operation, SocialMedia } from '../utils/enums';
+import { AuthService } from './auth.service';
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +15,9 @@ import { Operation, SocialMedia } from '../utils/enums';
 export class YoutubeApiService {
   http = inject(HttpClient)
   config = inject(ConfigService)
+  auth_service = inject(AuthService)
+
+
   constructor() { }
 
   // getYoutubeVideos(numberViewsMin: number = 0, numberLikesMin: number = 0): Observable<any> {
@@ -44,14 +51,16 @@ export class YoutubeApiService {
     created_at_max:string| null,
     offset:number | null | undefined,
     limit:number | null | undefined,
+    country_sys:string| null,
   },offset: number,limit:number
     
     
   ): Observable<any> {
-    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetChannels}?key=${this.config.apiKey}`;
+    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetChannels}`;
     const headers = new HttpHeaders({
       'accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+          'WWW-Authenticate':this.auth_service.isAuth
     });
     var data = channel_data;
     data['offset'] = offset;
@@ -76,10 +85,11 @@ export class YoutubeApiService {
   },
   offset:number,
   limit:number): Observable<any> {
-    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetVideos}?key=${this.config.apiKey}`;
+    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetVideos}`;
     const headers = new HttpHeaders({
       'accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'WWW-Authenticate':this.auth_service.isAuth
     });
     var data = video_data;
     data['offset'] = offset;
@@ -95,13 +105,16 @@ export class YoutubeApiService {
   }){
     const headers = new HttpHeaders({
       'accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'WWW-Authenticate':this.auth_service.isAuth
     });
     const body = link;
-    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.InspectChannel}?key=${this.config.apiKey}`;
+    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.InspectChannel}`;
     return this.http.post(url, body, { headers: headers });
   }
 
 }
+
+
 
 

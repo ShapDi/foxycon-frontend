@@ -5,21 +5,109 @@ import { JsonPipe, NgFor} from '@angular/common';
 import { YoutubeChannel } from '../../services/youtubeapi.interfece';
 import { PaginationWidgetComponent } from '../pagination-widget/pagination-widget.component';
 import { CardChannelComponent } from '../card-channel/card-channel.component';
+	import {AsyncPipe} from '@angular/common';
+import {TuiCurrency, TuiCurrencyPipe} from '@taiga-ui/addon-commerce';
+import {TuiDay, TuiTime} from '@taiga-ui/cdk';
+import {
+    TuiButton,
+    TuiError,
+    TuiGroup,
+    TuiIcon,
+    TuiLabel,
+    TuiTextfield,
+    TuiTitle,
+} from '@taiga-ui/core';
+import {
+    TuiBlock,
+    TuiCheckbox,
+    TuiChevron,
+    TuiDataListWrapper,
+    TuiFieldErrorPipe,
+    TuiInputNumber,
+    TuiPassword,
+    TuiRadio,
+    TuiSelect,
+    TuiTooltip,
+} from '@taiga-ui/kit';
+import {TuiForm, TuiHeader} from '@taiga-ui/layout';
+import {
+    TuiInputDateModule,
+    TuiInputModule,
+    TuiInputPhoneModule,
+    TuiInputSliderModule,
+    TuiInputTimeModule,
+    TuiTextfieldControllerModule,
+} from '@taiga-ui/legacy';
+
+
+
+	class Сountry {
+    constructor(
+        protected readonly name_db: string,
+    ) {}
+ 
+    protected toString(): string {
+        return `${this.name_db}`;
+    }
+}
+ 
+class Account {
+    constructor(
+        protected readonly id: string,
+        protected readonly name: string,
+        protected readonly amount: number,
+        protected readonly currency: TuiCurrency,
+        protected readonly cardSvg: string,
+    ) {}
+}
 
 
 @Component({
   selector: 'app-form-channel-search',
-  imports: [ReactiveFormsModule, PaginationWidgetComponent, NgFor, CardChannelComponent],
+  imports: [ReactiveFormsModule, PaginationWidgetComponent, NgFor, CardChannelComponent,
+    	        AsyncPipe,
+        ReactiveFormsModule,
+        TuiBlock,
+        TuiButton,
+        TuiCheckbox,
+        TuiChevron,
+        TuiCurrencyPipe,
+        TuiDataListWrapper,
+        TuiError,
+        TuiFieldErrorPipe,
+        TuiForm,
+        TuiGroup,
+        TuiHeader,
+        TuiIcon,
+        TuiInputDateModule,
+        TuiInputModule,
+        TuiInputNumber,
+        TuiInputPhoneModule,
+        TuiInputSliderModule,
+        TuiInputTimeModule,
+        TuiLabel,
+        TuiPassword,
+        TuiRadio,
+        TuiSelect,
+        TuiTextfield,
+        TuiTextfieldControllerModule,
+        TuiTitle,
+        TuiTooltip,
+    
+  ],
   templateUrl: './form-channel-search.component.html',
   styleUrl: './form-channel-search.component.css'
 })
 export class FormChannelSearchComponent {
-  
+  isLoading: boolean = false;
   page: number = 0
   youtubeApiService = inject(YoutubeApiService)
   profiles:YoutubeChannel[] = []
   currentPage = signal(0);
   pageSize = 10;
+
+
+  protected country = ['Russia'];
 
   form = new FormGroup({
     name_channel: new FormControl(null),
@@ -34,9 +122,11 @@ export class FormChannelSearchComponent {
     number_video_max: new FormControl(null),
     created_at_min: new FormControl(null),
     created_at_max: new FormControl(null),
+    country_sys: new FormControl(null),
   })
 
   onSubmit() {
+    this.form
     if (this.form.valid){
       console.log(this.form.value)
         //@ts-ignore
@@ -48,14 +138,13 @@ export class FormChannelSearchComponent {
     console.log(this.profiles)
     console.log(this.page)
     }
-
-    
-
-    function splitNumberIntoArray(num: number): number[] {
+        function splitNumberIntoArray(num: number): number[] {
       const count = Math.floor(num / 10); // Делим на 10 и округляем вниз
       return Array.from({ length: count }, (_, i) => i + 1);
     }
-  }
+}
+
+
 
   logValue(event: number) {
     this.page = 0;
@@ -75,4 +164,6 @@ export class FormChannelSearchComponent {
   console.log(this.profiles)
   console.log(this.page)
   }
+  
+
 }

@@ -24,8 +24,14 @@ export class AuthService {
     if (!this.access_token) {
       this.access_token = this.cookerServece.get('access_token')
     }
-    return !!this.access_token
+    return this.access_token
+  }
 
+  get token_access_token(){
+    if (!this.access_token) {
+      this.access_token = this.cookerServece.get('access_token')
+    }
+    return this.access_token
   }
 
   login(idToken: {id_token:string | null}){
@@ -55,7 +61,7 @@ export class AuthService {
 export const canActivateAuth = () => {
   const isLoggedIn = inject(AuthService).isAuth
 
-  if (isLoggedIn) {
+  if (!!isLoggedIn) {
     return true
   }
 

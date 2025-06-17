@@ -1,4 +1,12 @@
 .main-element {
-    padding-top: 30px;
+    background-color: #1A1618;
 }
 
+.main_text{
+    color:#1A1618;
+
+/* button{
+  background-color: var(--tui-status-positive);
+}
+ */
+}

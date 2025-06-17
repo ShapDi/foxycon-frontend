@@ -1,23 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-    --grey-color:#5E4B4B
+  --tui-service-backdrop: #231E20; 
+  /* Пример: если хотите изменить цвет фона для карточек, форм и т.д. */
+  --tui-background-base: #231E20;
+  --tui-border-normal: #AE4B2F;
+
+  --tui-background-elevation-1: #AE4B2F;
+  --tui-background-elevation-2: #AE4B2F;
+  --tui-background-elevation-3: #AE4B2F;
+  
+  --tui-text-primary: #ffffff;
+  --tui-text-secondary: #ffffff;
 }
+
+
 
 body {
-
+    background-color: var(--tui-service-backdrop);
     display: flex;
-    justify-self: center;
+  justify-content: center;
+    justify-items:stretch; 
+    height: 100%;
+    padding: 20px;
+    
 
 }
 
-
-.main-conteiner {
-    /* background: var(--grey-color); */
-    background:var(--tui-background-elevation-1)
-}
-
-button{
-  background-color: var(--tui-status-positive);
-}
 
