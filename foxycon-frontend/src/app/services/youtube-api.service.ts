@@ -56,6 +56,7 @@ export class YoutubeApiService {
     
     
   ): Observable<any> {
+    this.auth_service.refresh().subscribe()
     const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetChannels}`;
     const headers = new HttpHeaders({
       'accept': 'application/json',
@@ -85,12 +86,14 @@ export class YoutubeApiService {
   },
   offset:number,
   limit:number): Observable<any> {
+    this.auth_service.refresh().subscribe()
     const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetVideos}`;
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Content-Type': 'application/json',
       'WWW-Authenticate':this.auth_service.isAuth
     });
+
     var data = video_data;
     data['offset'] = offset;
     data['limit'] = limit;
@@ -108,6 +111,7 @@ export class YoutubeApiService {
       'Content-Type': 'application/json',
       'WWW-Authenticate':this.auth_service.isAuth
     });
+    this.auth_service.refresh().subscribe()
     const body = link;
     const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.InspectChannel}`;
     return this.http.post(url, body, { headers: headers });

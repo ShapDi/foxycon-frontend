@@ -34,6 +34,30 @@ export class AuthService {
     return this.access_token
   }
 
+  refresh(){
+    var access_token_old: string
+    var refresh_token_old: string
+    access_token_old = this.cookerServece.get("access_token")
+    refresh_token_old = this.cookerServece.get("refresh_token")
+    var body
+    body = {
+      "access_token":access_token_old,
+      "refresh_token": refresh_token_old
+    }
+    console.log(body)
+    return this.http.post<TokenResponse>(
+      `${this.baseApiUrl}/refresh`,body
+    ).pipe(
+      tap(val => {
+        this.access_token = val.access_token
+        this.refresh_token = val.refresh_token
+        console.log(this.access_token)
+        this.cookerServece.set("access_token", this.access_token)
+        this.cookerServece.set("refresh_token", this.refresh_token)
+      })
+    )
+  }
+
   login(idToken: {id_token:string | null}){
 
     const headers = new HttpHeaders({
