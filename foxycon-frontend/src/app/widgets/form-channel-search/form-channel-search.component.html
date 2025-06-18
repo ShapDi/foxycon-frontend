@@ -216,5 +216,7 @@
 
 </form>
 
-<app-pagination-widget [page_num_con]="page" (incrementCountEvent)="logValue($event)"></app-pagination-widget>
-<app-card-channel *ngFor="let data_cart of profiles" [data_cart]="data_cart"></app-card-channel>
+<!-- <app-pagination-widget [page_num_con]="page" (incrementCountEvent)="logValue($event)"></app-pagination-widget> -->
+<!-- <app-card-channel *ngFor="let data_cart of profiles" [data_cart]="data_cart"></app-card-channel> -->
+ <app-pagination-panel [page_num_con]="page" (incrementCountEvent)="logValue($event)"></app-pagination-panel>
+<app-cart-channel-new *ngFor="let data_cart of profiles" [data_cart]="data_cart"></app-cart-channel-new>

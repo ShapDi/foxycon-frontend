@@ -1,0 +1,85 @@
+	<section
+    tuiCardLarge="compact"
+    [tuiCardCollapsed]="collapsed()"
+>
+    <header tuiHeader="body-m">
+        <hgroup tuiTitle>
+            <h2>{{data_cart.name_channel}}</h2>
+            <!-- <p tuiSubtitle>
+                Some clients could encounter an error “Account not found” when selecting the account on the checkout
+                screen
+            </p> -->
+        </hgroup>
+        <!-- <aside tuiAccessories>
+            <button
+                appearance="action-grayscale"
+                iconEnd="@tui.copy"
+                tuiLink
+                type="button"
+            >
+                237-123-42
+        </button>
+        </aside> -->
+    </header>
+    <div tuiCardRow>
+        <div tuiTitle>
+            <div tuiSubtitle>Кольчество просмотров</div>
+            <div>
+                {{data_cart.total_views}}
+            </div>
+        </div>
+        <div tuiTitle>
+            <div tuiSubtitle>Количество подписчиков</div>
+            <div>
+                {{data_cart.number_subscribers}}
+            </div>
+        </div>
+        <div tuiTitle>
+            <div tuiSubtitle>Количество видео</div>
+            <div>
+                <tui-badge>
+                    {{data_cart.number_video}}
+                </tui-badge>
+            </div>
+        </div>
+        <button
+            appearance="secondary"
+            size="s"
+            tuiIconButton
+            type="button"
+            [tuiChevron]="!collapsed()"
+            (click)="collapsed.set(!collapsed())"
+        >
+            Expand
+        </button>
+    </div>
+    <tui-expand [expanded]="!collapsed()">
+        <table tuiTable>
+            <thead>
+                <tr>
+                    <th tuiTh>Дата создания</th>
+                    <th tuiTh>Дата добавления</th>
+                    <th tuiTh>Страна указаная владельцем</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td tuiTd>{{data_cart.created_at}}</td>
+                    <td tuiTd>{{data_cart.add_data}}</td>
+                    <td tuiTd>           
+                        @if (data_cart.country_system_youtube && data_cart.country_system_youtube.length > 0) {
+                            {{data_cart.country_system_youtube[0].name}}
+                        }
+                        @else {
+                            <div>Неуказано</div>
+                        }</td>
+                </tr>
+                <!-- <tr>
+                    <td tuiTd><b>Maskito</b></td>
+                    <td tuiTd>3.5.0</td>
+                    <td tuiTd>Holy Grail of input masking for the Web</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </tui-expand>
+</section>

@@ -1,0 +1,12 @@
+<tui-pagination
+    
+    [length]="page_int"
+    (indexChange)="goToPage($event)"
+    [sidePadding]="1"
+/>
+<ng-template
+    let-index
+>
+    {{ page[index] }}
+</ng-template>
+<br>

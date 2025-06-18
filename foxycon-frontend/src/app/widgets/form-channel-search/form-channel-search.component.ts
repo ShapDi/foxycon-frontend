@@ -38,6 +38,8 @@ import {
     TuiInputTimeModule,
     TuiTextfieldControllerModule,
 } from '@taiga-ui/legacy';
+import { CartChannelNewComponent } from '../cart-channel-new/cart-channel-new.component';
+import { PaginationPanelComponent } from '../pagination-panel/pagination-panel.component';
 
 
 
@@ -50,21 +52,12 @@ import {
         return `${this.name_db}`;
     }
 }
- 
-class Account {
-    constructor(
-        protected readonly id: string,
-        protected readonly name: string,
-        protected readonly amount: number,
-        protected readonly currency: TuiCurrency,
-        protected readonly cardSvg: string,
-    ) {}
-}
+
 
 
 @Component({
   selector: 'app-form-channel-search',
-  imports: [ReactiveFormsModule, PaginationWidgetComponent, NgFor, CardChannelComponent,
+  imports: [ReactiveFormsModule, PaginationWidgetComponent, NgFor, PaginationPanelComponent,CardChannelComponent,CartChannelNewComponent,
     	        AsyncPipe,
         ReactiveFormsModule,
         TuiBlock,
@@ -151,8 +144,8 @@ export class FormChannelSearchComponent {
     const formValue = this.form.value;
     const dataForApi = {
       ...formValue,
-      offset: 0,   // дефолтное значение
-      limit: 10,   // дефолтное значение
+      offset: 0,
+      limit: 10,   
     };
     console.log(event)
     //@ts-ignore
