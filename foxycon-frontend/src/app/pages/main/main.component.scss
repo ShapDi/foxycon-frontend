@@ -1,37 +1,117 @@
-.conteiner {
-    display: flex;
+// .conteiner {
+//     display: flex;
+// }
+
+// .text_main {
+
+// font-family: 'Inter';
+// font-style: normal;
+// font-weight: 400;
+// font-size: 40px;
+// line-height: 77px;
+// text-align: justify;
+
+// color: #AE4B2F;
+
+
+// }
+
+// .text {
+//     display: flex;
+//     flex-direction: column;
+//     /* Это система хранения и получения собранного контента из единой базы для последующего использования Предлагаемые кейсы использования FoxyCon Save System Поиск новых блогеров для публикации Проверка найдены каналов в общей MediaBuying */
+
+
+//     font-family: 'Inter';
+//     font-style: normal;
+//     font-weight: 400;
+//     font-size: 25px;
+//     line-height: 36px;
+//     display: flex;
+//     align-items: center;
+//     text-align: justify;
+
+//     color: #DA9E70;
+
+
+// }
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  margin: 50px;
+  gap: 25px;
 }
 
-.text_main {
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 40px;
-line-height: 77px;
-text-align: justify;
-
-color: #AE4B2F;
-
-
+.logo img {
+  height: 350px; 
 }
 
-.text {
-    display: flex;
-    flex-direction: column;
-    /* Это система хранения и получения собранного контента из единой базы для последующего использования Предлагаемые кейсы использования FoxyCon Save System Поиск новых блогеров для публикации Проверка найдены каналов в общей MediaBuying */
+.header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Центрируем логотип */
+  align-items: center;
+  padding: 0 20px; /* небольшой отступ слева/справа */
+  box-sizing: border-box;
+}
 
+.links {
+  position: absolute;
+  left: 50px;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 25px;
-    line-height: 36px;
-    display: flex;
-    align-items: center;
-    text-align: justify;
+.router-item {
+  border: none;
+  border-radius: 10px;
+  background-color: var(--orange-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 20px; 
+}
 
-    color: #DA9E70;
+.router-item-icon {
+  width: 24px; 
+  height: 24px;
+  filter: invert(1);
+}
 
+.text-container {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
+.title {
+  font-size: 42px;
+  font-weight: bold;
+  color: var(--orange-color);
+}
+
+.intro {
+  margin-bottom: 40px;
+  font-size: 24px;
+}
+
+.section-title {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.use-cases {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 24px;
 }

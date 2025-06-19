@@ -3,13 +3,20 @@ import { HeaderRoutersComponent } from '../../widgets/header-routers/header-rout
 import { YoutubeApiService } from '../../services/youtube-api.service';
 import { YouTubeVideo } from '../../services/youtubeapi.interfece';
 import { JsonPipe } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-main',
   imports: [],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  styleUrl: './main.component.scss',
 })
 export class MainComponent {
-  youtubeApiService = inject(YoutubeApiService)
-  profiles: YouTubeVideo[] = []
+  youtubeApiService = inject(YoutubeApiService);
+  profiles: YouTubeVideo[] = [];
+
+  router = inject(Router);
+
+  onClick(target: string) {
+    this.router.navigate([target]);
+  }
 }

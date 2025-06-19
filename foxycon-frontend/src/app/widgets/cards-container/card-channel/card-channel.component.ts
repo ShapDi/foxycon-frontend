@@ -13,10 +13,11 @@ import { SmartFormatPipe } from '../../../utils/pipes/SmartFormatPipe';
 export class CardChannelComponent {
   avatarUrl: string;
 
-  private fallbackUrl = 'assets/png/default-avatar.png';
+  private fallbackUrl = 'assets/png/Avatar.png';
 
   constructor(@Inject(CARD_DATA) public data: ChannelCardData) {
-    this.avatarUrl = `https://yt3.googleusercontent.com/${data.channel.youtube_id}=s160-c-k-c0x00ffffff-no-rj`;
+    // this.avatarUrl = `https://yt3.googleusercontent.com/${data.channel.youtube_id}=s160-c-k-c0x00ffffff-no-rj`;
+    this.avatarUrl = this.fallbackUrl;
   }
 
   useFallback() {
@@ -28,7 +29,7 @@ export class CardChannelComponent {
   getExposedStats(): {} {
     return {
       views: this.data.channel.total_views,
-      likes: this.data.channel.number_video,
+      videos: this.data.channel.number_video,
       subscribers: this.data.channel.number_subscribers,
       youtube: this.data.channel.created_at,
       foxycon: this.data.channel.add_data,

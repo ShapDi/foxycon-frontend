@@ -9,11 +9,11 @@ import { LayoutComponent } from './common-ui/layout/layout.component';
 import { canActivateAuth } from './services/auth.service';
 
 export const routes: Routes = [
+  { path: '', component: MainComponent, canActivate: [canActivateAuth] },
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: MainComponent, canActivate: [canActivateAuth] },
       {
         path: 'channel_search',
         component: ChannelSearchPageComponent,

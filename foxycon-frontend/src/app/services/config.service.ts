@@ -12,7 +12,7 @@ export class ConfigService {
   private config: ConfigResponse = {
     API_KEY: 'B00XgwofN.Aw',
     // "API_URL": "https://foxyconsystem.ru"
-    API_URL: 'http://212.192.217.123',
+    API_URL: 'https://foxyconweb.ru/back/',
   };
 
   // ngOnInit(){
