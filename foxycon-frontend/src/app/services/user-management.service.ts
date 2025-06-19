@@ -15,12 +15,12 @@ export class UserManagementService {
 
   baseApiUrl = `${this.config.apiUrl}/user_management`;
 
-  cookieService = inject(CookieService);
+  cookerServece = inject(CookieService);
   token: string | null = null;
 
   get isAuth() {
     if (!this.token) {
-      this.token = this.cookieService.get('token');
+      this.token = this.cookerServece.get('token');
     }
     return !!this.token;
   }
@@ -48,7 +48,7 @@ export class UserManagementService {
         tap((val) => {
           this.token = val.access_token;
 
-          this.cookieService.set('token', this.token);
+          this.cookerServece.set('token', this.token);
         })
       );
   }

@@ -12,6 +12,7 @@ import {
   YouTubeChannelFilter,
   YouTubeVideoFilter,
 } from '../interfaces/db-requests-interfaces';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ import {
 export class YoutubeApiService {
   http = inject(HttpClient);
   config = inject(ConfigService);
+  auth_service = inject(AuthService);
   constructor() {}
 
   // getYoutubeVideos(numberViewsMin: number = 0, numberLikesMin: number = 0): Observable<any> {
@@ -40,10 +42,12 @@ export class YoutubeApiService {
     offset: number,
     limit: number
   ): Observable<any> {
-    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetChannels}?key=${this.config.apiKey}`;
+    this.auth_service.refresh().subscribe();
+    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetChannels}`;
     const headers = new HttpHeaders({
       accept: 'application/json',
       'Content-Type': 'application/json',
+      'WWW-Authenticate': this.auth_service.isAuth,
     });
     var data = channel_data;
     data['offset'] = offset;
@@ -58,10 +62,12 @@ export class YoutubeApiService {
     offset: number,
     limit: number
   ): Observable<any> {
-    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetVideos}?key=${this.config.apiKey}`;
+    this.auth_service.refresh().subscribe();
+    const url = `${this.config.apiUrl}/${SocialMedia.YoutTube}/${Operation.GetVideos}`;
     const headers = new HttpHeaders({
       accept: 'application/json',
       'Content-Type': 'application/json',
+      'WWW-Authenticate': this.auth_service.isAuth,
     });
     var data = video_data;
     data['offset'] = offset;

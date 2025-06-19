@@ -1,8 +1,19 @@
-<form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+<!-- <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <label class="header">Нырок в лисью норку</label>
     <div class="inputs">
         <input class="input" formControlName="username" type="text" placeholder="Логин" required>
         <input class="input" formControlName="password" type="password" placeholder="Пароль" required>
     </div>
     <button class="button" type="submit">Войти</button>
-</form>
+</form> -->
+
+<div class="auth-form">
+    <label class="header">Нырок в лисью норку</label>
+    <asl-google-signin-button type="standard"
+        shape="square"
+        theme="outline"
+        text="signin_with"
+        size="large"
+        logo_alignment="left">
+    </asl-google-signin-button>
+</div>

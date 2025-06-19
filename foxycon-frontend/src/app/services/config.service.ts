@@ -4,15 +4,15 @@ import { lastValueFrom } from 'rxjs';
 import { ConfigResponse } from './config-service.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfigService {
-  private http = inject(HttpClient)
+  private http = inject(HttpClient);
 
   private config: ConfigResponse = {
-    "API_KEY": "B00XgwofN.Aw",
-    "API_URL": "https://foxyconsystem.ru"
-        // "API_URL": "http://127.0.0.1:2222"
+    API_KEY: 'B00XgwofN.Aw',
+    // "API_URL": "https://foxyconsystem.ru"
+    API_URL: 'http://212.192.217.123',
   };
 
   // ngOnInit(){

@@ -7,29 +7,49 @@ import {
 } from '@angular/forms';
 import { UserManagementService } from '../../services/user-management.service';
 import { Router } from '@angular/router';
+import {
+  GoogleSigninButtonModule,
+  SocialAuthService,
+  SocialUser,
+} from '@abacritt/angularx-social-login';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-auth-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, GoogleSigninButtonModule],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.scss',
 })
 export class AuthPageComponent {
-  authService = inject(UserManagementService);
+  authService: AuthService = inject(AuthService);
+  user!: SocialUser;
+  loggedIn!: boolean;
+  private isUserFetched = false;
+  constructor(
+    private authServiceGoggle: SocialAuthService,
+    private httpClient: HttpClient
+  ) {}
+
   router: Router = inject(Router);
 
-  form = new FormGroup({
-    username: new FormControl(null, Validators.required),
-    password: new FormControl(null, Validators.required),
-  });
+  ngOnInit() {
+    this.authServiceGoggle.authState.subscribe((user) => {
+      if (!this.isUserFetched && user) {
+        this.user = user;
+        this.loggedIn = true;
+        console.log('User:', user);
 
-  onSubmit() {
-    if (this.form.valid) {
-      console.log(this.form.value);
-      //@ts-ignore
-      this.authService.login(this.form.value).subscribe((res) => {
-        this.router.navigate(['']);
-      });
-    }
+        this.isUserFetched = true;
+      } else if (!user) {
+        this.loggedIn = false;
+        this.isUserFetched = false;
+      }
+      this.authService
+        .login({ id_token: this.user.idToken })
+        .subscribe((res) => {
+          this.router.navigate(['']);
+        });
+    });
   }
 }

@@ -1,36 +1,44 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   inject,
   Input,
   OnInit,
   ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import {
   YoutubeChannel,
   YouTubeVideo,
 } from '../../../services/youtubeapi.interfece';
-import {
-  BaseFilter,
-  YouTubeVideoFilter,
-} from '../../../interfaces/db-requests-interfaces';
+import { BaseFilter } from '../../../interfaces/db-requests-interfaces';
 import { CardData } from '../../../utils/types';
 import { YoutubeApiService } from '../../../services/youtube-api.service';
 import { CardContent, FilterMap } from '../../../utils/enums';
 import { FiltersComponent } from '../../filters/filters.component';
 import { CardsContainerComponent } from '../../cards-container/cards-container.component';
 import { PaginationComponent } from '../../pagination/pagination.component';
+import { SpinnerComponent } from '../../spinner/spinner.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-content-search',
-  imports: [FiltersComponent, CardsContainerComponent, PaginationComponent],
+  imports: [
+    FiltersComponent,
+    CardsContainerComponent,
+    PaginationComponent,
+    CommonModule,
+  ],
   templateUrl: './content-search.component.html',
   styleUrl: './content-search.component.scss',
 })
-export class ContentSearchComponent implements OnInit {
+export class ContentSearchComponent implements AfterViewInit {
   @Input() contentType!: CardContent;
 
   @ViewChild('cardsContainer') cardsContainerRef!: ElementRef;
+
+  isLoading = false;
 
   filter_map = FilterMap;
   youtubeApi: YoutubeApiService = inject(YoutubeApiService);
@@ -39,63 +47,55 @@ export class ContentSearchComponent implements OnInit {
   cards: CardData[] = [];
   items: number = this.cards.length;
 
-  readonly itemsPerPage: number = 3;
+  readonly itemsPerPage: number = 12;
 
   private filters: Partial<BaseFilter> = {};
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.getContent(this.filters);
   }
 
   getContent(filters: Partial<BaseFilter>) {
-    let contentVideo: YouTubeVideo[];
+    this.isLoading = true;
     this.filters = filters;
-    // this.youtubeApi
-    //   .getYoutubeVideo(
-    //     this.filters,
-    //     Math.max((this.page - 1) * this.itemsPerPage, 0),
-    //     this.itemsPerPage
-    //   )
-    //   .subscribe((val) => {
-    //     videos = val.content;
-    //     // this.items = videos.length;
 
-    //     this.cards = videos.map((video) => ({
-    //       type: Card.Video,
-    //       video: video,
-    //     }));
-    //   });
-    if (this.contentType == CardContent.Channel) {
-      let contentChannel: YoutubeChannel[] = [this.channel];
-      this.items = contentChannel.length;
-      this.cards = contentChannel.map((content) => ({
-        type: this.contentType,
-        channel: content,
-      }));
-    } else {
-      contentVideo = [
-        this.video,
-        this.video2,
-        this.video,
-        this.video2,
-        this.video,
-        this.video2,
-        this.video,
-        this.video2,
-        this.video,
-        this.video2,
-        this.video,
-        this.video2,
-        this.video,
-        this.video2,
-        this.video,
-        this.video2,
-      ];
-      this.items = contentVideo.length;
-      this.cards = contentVideo.map((content) => ({
-        type: this.contentType,
-        video: content,
-      }));
+    const offset = Math.max((this.page - 1) * this.itemsPerPage, 0);
+
+    const handleResponse = <T>(
+      val: { content: T[]; count: number },
+      logFn: (item: T) => void,
+      mapFn: (item: T) => CardData
+    ) => {
+      this.items = val.count;
+      val.content.forEach(logFn);
+      this.cards = val.content.map(mapFn);
+      this.isLoading = false;
+    };
+
+    switch (this.contentType) {
+      case CardContent.Video:
+        this.youtubeApi
+          .getYoutubeVideo(this.filters, offset, this.itemsPerPage)
+          .subscribe((val) =>
+            handleResponse<YouTubeVideo>(
+              val,
+              (v) => console.log(v.system_id),
+              (v) => ({ type: CardContent.Video, video: v })
+            )
+          );
+        break;
+
+      case CardContent.Channel:
+        this.youtubeApi
+          .getYoutubeChannel(this.filters, offset, this.itemsPerPage)
+          .subscribe((val) =>
+            handleResponse<YoutubeChannel>(
+              val,
+              (c) => console.log(c.link_channel),
+              (c) => ({ type: CardContent.Channel, channel: c })
+            )
+          );
+        break;
     }
   }
 
