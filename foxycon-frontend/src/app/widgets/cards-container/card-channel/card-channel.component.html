@@ -1,0 +1,20 @@
+<div class="channel-card">
+  <div class="left">
+    <a class="avatar-icon" target="_blank" [href]="data.channel.link_channel">
+      <img class="avatar" [src]="avatarUrl" (error)="useFallback()">
+    </a>
+
+    <a class="link" target="_blank" [href]="data.channel.link_channel">
+      {{ data.channel.name_channel }}
+    </a>
+  </div>
+
+  <div class="right stats">
+    @for (stat of getExposedStats() | keyvalue: originalOrder; track $index;) {
+      <div class="stat">
+        <img class="icon" [src]="'/assets/svg/' + stat.key + '.svg'">
+        {{ stat.value | smartFormat }}
+      </div>
+    }
+  </div>
+</div>

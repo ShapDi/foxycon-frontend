@@ -1,18 +1,18 @@
 import { Injectable, Type } from '@angular/core';
-import { Card } from '../utils/enums';
-import { CardVideoComponent } from '../widgets/card-video/card-video.component';
-import { CardChannelComponent } from '../widgets/card-channel/card-channel.component';
+import { CardContent } from '../utils/enums';
+import { CardVideoComponent } from '../widgets/cards-container/card-video/card-video.component';
+import { CardChannelComponent } from '../widgets/cards-container/card-channel/card-channel.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CardsResolverService {
-  private componentMap: Record<Card, Type<any>> = {
-    [Card.Video]: CardVideoComponent,
-    [Card.Channel]: CardChannelComponent,
+  private componentMap: Record<CardContent, Type<any>> = {
+    [CardContent.Video]: CardVideoComponent,
+    [CardContent.Channel]: CardChannelComponent,
   };
 
-  getComponent(type: Card): Type<any> | null {
+  getComponent(type: CardContent): Type<any> | null {
     return this.componentMap[type] || null;
   }
 }

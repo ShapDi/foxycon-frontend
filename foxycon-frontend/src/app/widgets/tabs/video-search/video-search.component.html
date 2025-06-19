@@ -1,9 +1,0 @@
-<div class="wrapper">
-    <app-filters [label]="'Видео с'" [filters_map]="filter_map.VideoSearch" (filter_results)="getVideos($event)"></app-filters>
-    <hr>
-    <app-cards-container [cards]="cards"></app-cards-container>
-</div>
-
-<div class="pagination-wrapper">
-    <app-pagination [currentPage]="page" [totalItems]="items"></app-pagination>
-</div>

@@ -1,18 +1,29 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { PaginationCardComponent } from './pagination-card/pagination-card.component';
+import { delay } from 'rxjs';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [PaginationCardComponent],
+  imports: [PaginationCardComponent, CommonModule],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
 })
 export class PaginationComponent implements OnChanges {
   @Input() currentPage: number = 1;
   @Input() totalItems!: number;
+  @Input() itemsPerPage!: number;
+  @Output() pageChanged = new EventEmitter<number>();
 
-  readonly itemsPerPage: number = 3;
   pages: (number | 'dots')[] = [];
   totalPages: number = 1;
 
@@ -53,9 +64,8 @@ export class PaginationComponent implements OnChanges {
 
   selectPage(page: number): void {
     if (page >= 1 && page <= this.totalPages && page !== this.currentPage) {
-      this.currentPage = page;
+      this.pageChanged.emit(page);
       this.pages = this.buildPages();
-      console.log('Selected page:', page);
     }
   }
 

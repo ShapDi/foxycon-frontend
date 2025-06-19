@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChannelSearchComponent } from './channel-search.component';
+import { ContentSearchComponent } from './content-search.component';
 
-describe('ChannelSearchComponent', () => {
-  let component: ChannelSearchComponent;
-  let fixture: ComponentFixture<ChannelSearchComponent>;
+describe('ContentSearchComponent', () => {
+  let component: ContentSearchComponent;
+  let fixture: ComponentFixture<ContentSearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChannelSearchComponent]
+      imports: [ContentSearchComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ChannelSearchComponent);
+    fixture = TestBed.createComponent(ContentSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

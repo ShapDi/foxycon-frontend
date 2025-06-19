@@ -1,0 +1,68 @@
+:host {
+  border-radius: 5px;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+.channel-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 50%;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.link:hover {
+  color: var(--orange-color);
+}
+
+.right.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  align-items: flex-start;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  gap: 8px;
+}
+
+.stat .icon {
+  width: 25px;
+  height: 25px;
+  filter: invert(1);
+}

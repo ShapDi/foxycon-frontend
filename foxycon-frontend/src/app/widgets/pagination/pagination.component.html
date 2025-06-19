@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="totalPages > 1">
   <app-pagination-card 
     [label]="'‹'" 
     [disabled]="currentPage === 1"

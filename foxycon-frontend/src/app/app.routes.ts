@@ -21,7 +21,8 @@ export const routes: Routes = [
       },
       {
         path: 'video_search',
-        component: VideoSearchPageComponent /*canActivate: [canActivateAuth]*/,
+        component: VideoSearchPageComponent,
+        canActivate: [canActivateAuth],
       },
       {
         path: 'channel_inspection',

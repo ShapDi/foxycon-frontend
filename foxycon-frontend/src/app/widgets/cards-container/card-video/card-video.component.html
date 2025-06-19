@@ -8,7 +8,7 @@
     @for (stat of getExposedStats() | keyvalue: originalOrder; track $index;) {
     <div class="stat">
         <img class="icon" [src]="'/assets/svg/' + stat.key + '.svg'">
-        {{stat.value}}
+        {{ stat.value | smartFormat}}
     </div>
     }
 </div>

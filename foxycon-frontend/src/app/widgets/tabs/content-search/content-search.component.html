@@ -1,0 +1,9 @@
+<div class="content-wrapper" #cardsContainer>
+    <app-filters [label]="'Видео с'" [filters_map]="getFilterMap()" (filter_results)="getContent($event)"></app-filters>
+    <hr>
+    <app-cards-container [cards]="cards"></app-cards-container>
+</div>
+
+<div class="pagination-wrapper">
+    <app-pagination [currentPage]="page" [totalItems]="items" [itemsPerPage]="itemsPerPage" (pageChanged)="onPageChange($event)"></app-pagination>
+</div>
