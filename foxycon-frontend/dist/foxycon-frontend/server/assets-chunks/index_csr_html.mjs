@@ -9,6 +9,6 @@ export default `<!doctype html>
 <style>@font-face{font-family:Jura;font-style:normal;font-weight:500;src:url(/assets/fonts/Jura-Regular.ttf)}:root{--background-color:#231E20;--orange-color:#AE4B2F;--light-gray-color:#939192;--dark-color:#1A1618;--light-dark-color:#272325}body{background:var(--background-color);color:#fff;font-family:Jura;margin-left:100px;margin-right:100px}</style><link rel="stylesheet" href="styles-ROTJRHBU.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-ROTJRHBU.css"></noscript></head>
 <body ngcm="">
   <app-root></app-root>
-<script src="polyfills-FFHMD2TL.js" type="module"></script><script src="main-BFRFHLXL.js" type="module"></script></body>
+<script src="polyfills-FFHMD2TL.js" type="module"></script><script src="main-ZLUEWY26.js" type="module"></script></body>
 </html>
 `;
