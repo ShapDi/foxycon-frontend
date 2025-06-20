@@ -12,7 +12,12 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CustomSelectValue, OptionConfig } from '../../utils/types';
 import { Subscription } from 'rxjs';
 
@@ -31,6 +36,7 @@ export class CustomSelectComponent implements OnInit, OnChanges, OnDestroy {
   selectedKey: string = '';
   fieldGroup = new FormGroup({});
   isOpen = false;
+  isActive = false;
 
   private fieldGroupSub?: Subscription;
 
@@ -70,9 +76,15 @@ export class CustomSelectComponent implements OnInit, OnChanges, OnDestroy {
     event.stopPropagation();
   }
 
+  onInputUpdated(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.isActive = value != '';
+  }
+
   select(key: string): void {
     this.selectedKey = key;
     this.isOpen = false;
+    this.isActive = false;
     this.setupFieldGroup();
     this.emitCombinedValue();
   }

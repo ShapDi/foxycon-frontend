@@ -5,11 +5,14 @@
     } @else {
       <div class="inputs" [formGroup]="fieldGroup"> 
         @for (field of options[selectedKey].fields; track $index) {
-          <input
+          <input class="field-input"
+            [class.active]="isActive"
             [formControlName]="field.name"            
             [type]="field.type"
             [placeholder]="field.placeholder"
             (click)="preventDropdown($event)"
+            (input)="onInputUpdated($event)"
+            [attr.min]="0"
           >
         }
       </div>

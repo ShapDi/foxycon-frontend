@@ -63,6 +63,15 @@
     box-sizing: border-box;
 }
 
+.field-input{
+    border: 0px solid;
+}
+
+.field-input.active{
+    border: 1px solid;
+    border-color: var(--orange-color);
+}
+
 input {
     background-color: var(--dark-color);
     border-radius: 5px;
@@ -96,6 +105,7 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     min-width: 0;
-    width: 100%;
-    flex: 1 1 0;
+    // width: 100%;
+    // flex: 1 1 0;
+    margin: 0;
 }
