@@ -1,11 +1,14 @@
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnInit,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { CustomSelectComponent } from '../../../common-ui/custom-select/custom-select.component';
 import { OptionConfig } from '../../../utils/types';

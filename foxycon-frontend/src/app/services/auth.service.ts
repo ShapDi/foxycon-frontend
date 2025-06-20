@@ -42,14 +42,12 @@ export class AuthService {
       access_token: access_token_old,
       refresh_token: refresh_token_old,
     };
-    console.log(body);
     return this.http
       .post<TokenResponse>(`${this.baseApiUrl}/refresh`, body)
       .pipe(
         tap((val) => {
           this.access_token = val.access_token;
           this.refresh_token = val.refresh_token;
-          console.log(this.access_token);
           this.cookieService.set('access_token', this.access_token);
           this.cookieService.set('refresh_token', this.refresh_token);
         })

@@ -60,11 +60,9 @@ export class ContentSearchComponent implements AfterViewInit {
 
     const handleResponse = <T>(
       val: { content: T[]; count: number },
-      logFn: (item: T) => void,
       mapFn: (item: T) => CardData
     ) => {
       this.items = val.count;
-      val.content.forEach(logFn);
       this.cards = val.content.map(mapFn);
       this.isLoading = false;
     };
@@ -74,11 +72,10 @@ export class ContentSearchComponent implements AfterViewInit {
         this.youtubeApi
           .getYoutubeVideo(this.filters, offset, this.itemsPerPage)
           .subscribe((val) =>
-            handleResponse<YouTubeVideo>(
-              val,
-              (v) => console.log(v.system_id),
-              (v) => ({ type: CardContent.Video, video: v })
-            )
+            handleResponse<YouTubeVideo>(val, (v) => ({
+              type: CardContent.Video,
+              video: v,
+            }))
           );
         break;
 
@@ -86,11 +83,10 @@ export class ContentSearchComponent implements AfterViewInit {
         this.youtubeApi
           .getYoutubeChannel(this.filters, offset, this.itemsPerPage)
           .subscribe((val) =>
-            handleResponse<YoutubeChannel>(
-              val,
-              (c) => console.log(c.link_channel),
-              (c) => ({ type: CardContent.Channel, channel: c })
-            )
+            handleResponse<YoutubeChannel>(val, (c) => ({
+              type: CardContent.Channel,
+              channel: c,
+            }))
           );
         break;
     }

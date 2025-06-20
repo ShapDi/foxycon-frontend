@@ -52,7 +52,6 @@ export class YoutubeApiService {
     var data = channel_data;
     data['offset'] = offset;
     data['limit'] = limit;
-    console.log(data);
     const body = data;
     return this.http.post<YoutubeChannel[]>(url, body, { headers: headers });
   }
@@ -72,7 +71,6 @@ export class YoutubeApiService {
     var data = video_data;
     data['offset'] = offset;
     data['limit'] = limit;
-    console.log(data);
     const body = data;
     return this.http.post<VideoResponse>(url, body, { headers: headers });
   }
